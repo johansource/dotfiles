@@ -71,8 +71,13 @@ plugins=(git)
 
 # User configuration
 
-# Add pnpm to PATH
-export PATH=$HOME/.local/share/pnpm:$PATH
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

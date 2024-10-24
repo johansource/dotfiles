@@ -11,15 +11,8 @@ else
     echo "Installing pnpm..."
     curl -fsSL https://get.pnpm.io/install.sh | sh -
 
-    # Assuming your dotfiles setup already configures the PATH in .zshrc
-    echo "Pnpm installed. Ensure that your dotfiles configure pnpm in the PATH."
-
-    # Add pnpm to PATH if it's not already there
-    if ! grep -q "pnpm" ~/.zshrc; then
-        echo "Adding pnpm to PATH..."
-        echo "export PATH=\$HOME/.local/share/pnpm:\$PATH" >>~/.zshrc
-        source ~/.zshrc
-    fi
+    # Since your dotfiles setup configures PNPM_HOME in .zshrc, we rely on that
+    echo "Pnpm installed. Ensure that your dotfiles correctly configure PNPM_HOME and the PATH."
 fi
 
 # Install Node.js LTS using pnpm
@@ -27,9 +20,6 @@ echo "Installing the latest LTS version of Node.js using pnpm..."
 
 # Pnpm's env tool to install the latest LTS version of Node.js
 pnpm env use --global lts
-
-# Ensure the pnpm and Node.js installation is sourced
-source ~/.zshrc
 
 # Verify installations
 echo "Verifying pnpm and Node.js installations..."

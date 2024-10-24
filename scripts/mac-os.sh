@@ -39,6 +39,14 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -boo
 echo "Setting a fast keyboard repeat rate..."
 defaults write NSGlobalDomain KeyRepeat -int 2
 
+# Set scroll direction for mouse (inverts default behavior)
+echo "Setting scroll direction for mouse..."
+defaults write NSGlobalDomain com.apple.scrollwheel.scaling -1
+
+# Disable the alert sound
+echo "Disabling system alert sound..."
+defaults write NSGlobalDomain com.apple.sound.beep.volume -int 0
+
 # Change the default location for screenshots (restart SystemUIServer to apply changes)
 echo "Setting default screenshot location to ~/Pictures/Screenshots..."
 mkdir -p "${HOME}/Pictures/Screenshots"

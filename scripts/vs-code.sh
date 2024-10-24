@@ -10,19 +10,6 @@ if ! command -v code &>/dev/null; then
     exit 1
 fi
 
-# Check if the system is Apple Silicon or Intel and configure Homebrew PATH accordingly
-if [[ $(uname -m) == "arm64" ]]; then
-    # Apple Silicon (M1/M2)
-    if [ -x "/opt/homebrew/bin/brew" ] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]; then
-        export PATH="/opt/homebrew/bin:$PATH"
-    fi
-else
-    # Intel Macs
-    if [ -x "/usr/local/bin/brew" ] && [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
-        export PATH="/usr/local/bin:$PATH"
-    fi
-fi
-
 # List extensions for installation
 extensions=(
     aaron-bond.better-comments

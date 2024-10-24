@@ -34,7 +34,7 @@ brew upgrade
 brew upgrade --cask
 brew cleanup
 
-# Define an array of packages to install using Homebrew.
+# Define an array of packages to install using Homebrew
 packages=(
     "git"
     "zsh"
