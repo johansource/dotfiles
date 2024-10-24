@@ -76,4 +76,12 @@ else
     echo "'pnpm-node.sh' not found, skipping..."
 fi
 
+# Run the VS Code script
+if [[ -f "${scriptsdir}/mac-os-dock-apps.sh" ]]; then
+    echo "Running macOS dock apps script..."
+    ${scriptsdir}/mac-os-dock-apps.sh
+else
+    echo "'mac-os-dock-apps.sh' not found, skipping..."
+fi
+
 echo "Installation complete!"

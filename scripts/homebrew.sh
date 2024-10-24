@@ -75,13 +75,13 @@ apps=(
     "discord"
     "docker"
     "figma"
+    "iina"
     "notion"
     "obs"
     "pika"
     "rectangle"
     "spotify"
     "visual-studio-code"
-    "vlc"
     "wezterm"
 )
 
