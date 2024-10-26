@@ -28,11 +28,6 @@ echo "Showing all file extensions in Finder..."
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults read NSGlobalDomain AppleShowAllExtensions
 
-# Set Finder view style to Column View
-echo "Setting Finder preferred view style to Column view (clmv)..."
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
-defaults read com.apple.finder FXPreferredViewStyle
-
 # Disable Guest login
 echo "Disabling Guest account login..."
 sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
@@ -55,7 +50,6 @@ defaults write NSGlobalDomain com.apple.sound.beep.volume -int 0
 echo "Setting default screenshot location to ~/Pictures/Screenshots..."
 mkdir -p "${HOME}/Pictures/Screenshots"
 defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
-killall SystemUIServer
 
 # Set screensaver to ask for password immediately after sleep or screensaver starts
 echo "Setting screensaver to ask for password after 10 seconds..."
@@ -68,5 +62,9 @@ killall Dock
 # Apply Finder settings (restart Finder to apply changes)
 echo "Applying Finder settings..."
 killall Finder
+
+# Apply SystemUIServer settings (restart SystemUIServer to apply changes)
+echo "Applying SystemUIServer settings..."
+killall SystemUIServer
 
 echo "MacOS settings configuration complete!"
