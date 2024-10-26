@@ -8,6 +8,7 @@
   "workbench.startupEditor": "none",
   "editor.fontSize": 16,
   "debug.console.fontSize": 16,
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "terminal.integrated.fontSize": 16,
   "editor.tabSize": 2,
   "editor.formatOnSave": true,

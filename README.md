@@ -42,6 +42,6 @@ TODO:
 - [x]: MacOS dock apps script, cleanup and auto add
 - [ ]: Python script, also add python stuff where needed
 - [ ]: Flutter script, also add python stuff where needed
-- [ ]: WezTerm config and beautification
+- [x]: WezTerm config and beautification
 - [ ]: Unity stuff for VS Code
 - [ ]: Unreal Engine stuff for VS Code

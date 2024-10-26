@@ -101,6 +101,8 @@ done
 # Define an array of applications to install using Homebrew casks
 fonts=(
     "font-jetbrains-mono"
+    # For symbols in VS Code terminal
+    "font-jetbrains-mono-nerd-font"
     "font-source-code-pro"
 )
 
