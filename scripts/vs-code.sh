@@ -21,6 +21,7 @@ extensions=(
     bradlc.vscode-tailwindcss
     catppuccin.catppuccin-vsc
     christian-kohler.path-intellisense
+    clinyong.vscode-css-modules
     dbaeumer.vscode-eslint
     dsznajder.es7-react-js-snippets
     eamodio.gitlens
@@ -59,6 +60,7 @@ extensions=(
     whizkydee.material-palenight-theme
     wix.vscode-import-cost
     yclepticstudios.unity-snippets
+    yoavbls.pretty-ts-errors
 )
 
 # Get a list of all currently installed extensions.
