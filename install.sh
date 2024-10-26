@@ -1,10 +1,12 @@
 #!/usr/bin/env zsh
 ############################
-# This script creates symlinks from the home directory to any desired dotfiles in the dotfiles repository
-# And also installs MacOS Software
-# And also installs Homebrew Packages and Casks
-# And also sets up VS Code
-# And also sets up pnpm and Node.js
+# This script sets up symlinks from the home directory to specified dotfiles in the repository
+# Installs essential macOS software
+# Adds necessary Homebrew packages and casks
+# Configures Visual Studio Code settings
+# Installs and configures pnpm and Node.js
+# Sets up Tcl/Tk for Python’s Tkinter support
+# Customizes macOS Dock with preferred applications
 ############################
 
 # Dotfiles directory
@@ -79,6 +81,14 @@ if [[ -f "${scriptsdir}/pnpm-node.sh" ]]; then
     zsh ${scriptsdir}/pnpm-node.sh
 else
     echo "'pnpm-node.sh' not found, skipping..."
+fi
+
+# Run the Tcl/Tk setup script
+if [[ -f "${scriptsdir}/tcl-tk-python.sh" ]]; then
+    echo "Running Tcl/Tk setup script for Python..."
+    zsh ${scriptsdir}/tcl-tk-python.sh
+else
+    echo "'tcl-tk-python.sh' not found, skipping..."
 fi
 
 # Run the VS Code script

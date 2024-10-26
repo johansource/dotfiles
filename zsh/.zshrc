@@ -74,6 +74,7 @@ plugins=(git)
 # Starship
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
+# Starship end
 
 # Zsh syntax highlighting
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -86,6 +87,23 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # Activate autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Python
+
+# Pyenv setup
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+# Poetry setup (adds Poetry to PATH)
+export PATH="$HOME/.local/bin:$PATH"
+
+# Tkinter setup (tcl-tk dependencies)
+export LDFLAGS="-L$(brew --prefix tcl-tk)/lib"
+export CPPFLAGS="-I$(brew --prefix tcl-tk)/include"
+export PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig"
+
+# Python end
 
 # Pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

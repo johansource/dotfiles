@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 ############################
-# This script installs Homebrew
+# This script installs Homebrew along with formulae, casks, and fonts
 ############################
 
 # Install Homebrew if it isn't already installed
@@ -37,7 +37,11 @@ brew cleanup
 # Define an array of packages to install using Homebrew
 packages=(
     "git"
+    "python"
+    "poetry"
+    "pyenv"
     "starship"
+    "tcl-tk"
     "zsh"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"

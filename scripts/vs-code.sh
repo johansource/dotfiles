@@ -23,16 +23,27 @@ extensions=(
     dsznajder.es7-react-js-snippets
     eamodio.gitlens
     esbenp.prettier-vscode
+    expo.vscode-expo-tools
+    formulahendry.code-runner
+    formulahendry.docker-explorer
     foxundermoon.shell-format
     gruntfuggly.todo-tree
     johnpapa.vscode-peacock
+    mikestead.dotenv
+    ms-azuretools.vscode-docker
     ms-python.black-formatter
     ms-python.debugpy
+    ms-python.isort
     ms-python.pylint
     ms-python.python
     ms-python.vscode-pylance
+    ms-toolsai.jupyter
+    ms-vscode-remote.remote-containers
+    msjsdiag.vscode-react-native
+    njpwerner.autodocstring
     pkief.material-icon-theme
     pranaygp.vscode-css-peek
+    redhat.vscode-yaml
     tamasfe.even-better-toml
     usernamehw.errorlens
     whizkydee.material-palenight-theme
