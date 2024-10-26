@@ -91,7 +91,7 @@ else
     echo "'tcl-tk-python.sh' not found, skipping..."
 fi
 
-# Run the VS Code script
+# Run the MacOS dock apps script
 if [[ -f "${scriptsdir}/mac-os-dock-apps.sh" ]]; then
     echo "Running macOS dock apps script..."
     zsh ${scriptsdir}/mac-os-dock-apps.sh

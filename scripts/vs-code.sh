@@ -15,10 +15,12 @@ extensions=(
     aaron-bond.better-comments
     adpyke.codesnap
     alefragnani.bookmarks
+    amlovey.shaderlabvscodefree
     antfu.browse-lite
     antfu.vite
     bradlc.vscode-tailwindcss
     catppuccin.catppuccin-vsc
+    christian-kohler.path-intellisense
     dbaeumer.vscode-eslint
     dsznajder.es7-react-js-snippets
     eamodio.gitlens
@@ -28,9 +30,13 @@ extensions=(
     formulahendry.docker-explorer
     foxundermoon.shell-format
     gruntfuggly.todo-tree
+    jeff-hykin.better-cpp-syntax
     johnpapa.vscode-peacock
+    k--kato.docomment
+    kleber-swf.unity-code-snippets
     mikestead.dotenv
     ms-azuretools.vscode-docker
+    ms-dotnettools.csharp
     ms-python.black-formatter
     ms-python.debugpy
     ms-python.isort
@@ -38,16 +44,21 @@ extensions=(
     ms-python.python
     ms-python.vscode-pylance
     ms-toolsai.jupyter
+    ms-vscode.cmake-tools
+    ms-vscode.cpptools
     ms-vscode-remote.remote-containers
     msjsdiag.vscode-react-native
     njpwerner.autodocstring
     pkief.material-icon-theme
     pranaygp.vscode-css-peek
     redhat.vscode-yaml
+    slevesque.shader
     tamasfe.even-better-toml
     usernamehw.errorlens
+    visualstudiotoolsforunity.vstuc
     whizkydee.material-palenight-theme
     wix.vscode-import-cost
+    yclepticstudios.unity-snippets
 )
 
 # Get a list of all currently installed extensions.
@@ -71,7 +82,7 @@ TARGET_DIR="${HOME}/Library/Application Support/Code/User"
 # Check if VS Code settings directory exists
 if [ -d "$TARGET_DIR" ]; then
     # Define the source directory for VS Code user settings
-    SOURCE_DIR="${HOME}/.dotfiles/vscode/User"
+    SOURCE_DIR="${HOME}/Projects/dotfiles/vscode/User"
     # Copy your custom settings.json and keybindings.json to the VS Code settings directory
     ln -sf "${SOURCE_DIR}/settings.json" "${TARGET_DIR}/settings.json"
     # ln -sf "${SOURCE_DIR}/keybindings.json" "${TARGET_DIR}/keybindings.json"

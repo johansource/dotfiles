@@ -36,12 +36,15 @@ brew cleanup
 
 # Define an array of packages to install using Homebrew
 packages=(
+    "cocoapods"
     "git"
+    "openjdk"
     "python"
     "poetry"
     "pyenv"
     "starship"
     "tcl-tk"
+    "watchman"
     "zsh"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"
@@ -77,7 +80,9 @@ fi
 # Define an array of applications to install using Homebrew casks
 apps=(
     "1password"
+    "android-studio"
     "arc"
+    "blender"
     "devtoys"
     "discord"
     "docker"

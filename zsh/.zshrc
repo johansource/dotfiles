@@ -113,6 +113,23 @@ case ":$PATH:" in
 esac
 # Pnpm end
 
+# Java
+export JAVA_HOME="$(brew --prefix openjdk)"
+export PATH="$JAVA_HOME/bin:$PATH"
+export CPPFLAGS="-I$(brew --prefix openjdk)/include"
+# Java end
+
+# Android Studio
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin"
+# Android Studio end
+
+# Watchman
+# Increase file descriptor limits for Watchman on macOS
+sysctl -w fs.inotify.max_user_instances=512
+sysctl -w fs.inotify.max_user_watches=524288
+# Watchman end
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
