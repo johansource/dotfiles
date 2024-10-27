@@ -35,6 +35,7 @@ extensions=(
     johnpapa.vscode-peacock
     k--kato.docomment
     kleber-swf.unity-code-snippets
+    kuscamara.remove-unused-imports
     mikestead.dotenv
     ms-azuretools.vscode-docker
     ms-dotnettools.csharp
