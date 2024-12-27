@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 ############################
-# This script cleans up the macOS Dock and adds desired applications
+# This script cleans up the MacOS Dock and adds desired applications
 ############################
 
 # Install dockutil if not already installed

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 ############################
-# This script installs macOS software and sets up essential tools and system preferences
+# This script installs MacOS software and sets up essential tools and system preferences
 ############################
 
 # Install Xcode Command Line Tools

@@ -10,14 +10,14 @@
 ############################
 
 # Dotfiles directory
-dotfilesdir="${HOME}/Projects/dotfiles"
+dotfiles_dir="${HOME}/Projects/dotfiles"
 
-# Scripts directory
-scriptsdir="${dotfilesdir}/scripts"
+# MacOS scripts directory
+macos_dir="${dotfiles_dir}/macos"
 
 # Change to the dotfiles directory
-echo "Changing to the ${dotfilesdir} directory"
-cd "${dotfilesdir}" || exit
+echo "Changing to the ${dotfiles_dir} directory"
+cd "${dotfiles_dir}" || exit
 
 # List of source files and target locations
 files=(
@@ -32,7 +32,7 @@ for file in "${files[@]}"; do
     # Split the source and target using colon as a delimiter
     source="${file%%:*}"
     target="${file##*:}"
-    source_path="${dotfilesdir}/${source}"
+    source_path="${dotfiles_dir}/${source}"
 
     # Get the directory of the target file
     target_dir="$(dirname "${target}")"
@@ -52,51 +52,51 @@ for file in "${files[@]}"; do
 done
 
 # Run the MacOS script
-if [[ -f "${scriptsdir}/mac-os.sh" ]]; then
-    echo "Running MacOS setup script..."
-    zsh ${scriptsdir}/mac-os.sh
+if [[ -f "${macos_dir}/xcode-defaults.sh" ]]; then
+    echo "Running Xcode and defaults setup script..."
+    zsh ${macos_dir}/xcode-defaults.sh
 else
-    echo "'mac-os.sh' not found, skipping..."
+    echo "'xcode-defaults.sh' not found, skipping..."
 fi
 
 # Run the Homebrew script
-if [[ -f "${scriptsdir}/homebrew.sh" ]]; then
+if [[ -f "${macos_dir}/homebrew.sh" ]]; then
     echo "Running Homebrew setup script..."
-    zsh ${scriptsdir}/homebrew.sh
+    zsh ${macos_dir}/homebrew.sh
 else
     echo "'homebrew.sh' not found, skipping..."
 fi
 
 # Run the VS Code script
-if [[ -f "${scriptsdir}/vs-code.sh" ]]; then
+if [[ -f "${macos_dir}/vs-code.sh" ]]; then
     echo "Running VS Code setup script..."
-    zsh ${scriptsdir}/vs-code.sh
+    zsh ${macos_dir}/vs-code.sh
 else
     echo "'vs-code.sh' not found, skipping..."
 fi
 
 # Run the pnpm and Node.js script
-if [[ -f "${scriptsdir}/pnpm-node.sh" ]]; then
+if [[ -f "${macos_dir}/pnpm-node.sh" ]]; then
     echo "Running pnpm and Node.js setup script..."
-    zsh ${scriptsdir}/pnpm-node.sh
+    zsh ${macos_dir}/pnpm-node.sh
 else
     echo "'pnpm-node.sh' not found, skipping..."
 fi
 
 # Run the Tcl/Tk setup script
-if [[ -f "${scriptsdir}/tcl-tk-python.sh" ]]; then
+if [[ -f "${macos_dir}/tcl-tk-python.sh" ]]; then
     echo "Running Tcl/Tk setup script for Python..."
-    zsh ${scriptsdir}/tcl-tk-python.sh
+    zsh ${macos_dir}/tcl-tk-python.sh
 else
     echo "'tcl-tk-python.sh' not found, skipping..."
 fi
 
 # Run the MacOS dock apps script
-if [[ -f "${scriptsdir}/mac-os-dock-apps.sh" ]]; then
-    echo "Running macOS dock apps script..."
-    zsh ${scriptsdir}/mac-os-dock-apps.sh
+if [[ -f "${macos_dir}/dock-apps.sh" ]]; then
+    echo "Running MacOS dock apps script..."
+    zsh ${macos_dir}/dock-apps.sh
 else
-    echo "'mac-os-dock-apps.sh' not found, skipping..."
+    echo "'dock-apps.sh' not found, skipping..."
 fi
 
 echo "Installation complete!"

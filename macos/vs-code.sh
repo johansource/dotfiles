@@ -31,6 +31,7 @@ extensions=(
     formulahendry.docker-explorer
     foxundermoon.shell-format
     gruntfuggly.todo-tree
+    hediet.debug-visualizer
     jeff-hykin.better-cpp-syntax
     johnpapa.vscode-peacock
     k--kato.docomment
