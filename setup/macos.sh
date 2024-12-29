@@ -1,19 +1,20 @@
 #!/usr/bin/env zsh
 ############################
+# Main setup script for MacOS
 # This script sets up symlinks from the home directory to specified dotfiles in the repository
-# Installs essential macOS software
+# Installs essential MacOS software
 # Adds necessary Homebrew packages and casks
 # Configures Visual Studio Code settings
 # Installs and configures pnpm and Node.js
 # Sets up Tcl/Tk for Python’s Tkinter support
-# Customizes macOS Dock with preferred applications
+# Customizes MacOS Dock with preferred applications
 ############################
 
 # Dotfiles directory
 dotfiles_dir="${HOME}/Projects/dotfiles"
 
 # MacOS scripts directory
-macos_dir="${dotfiles_dir}/macos"
+macos_dir="${dotfiles_dir}/setup/macos"
 
 # Change to the dotfiles directory
 echo "Changing to the ${dotfiles_dir} directory"
@@ -52,11 +53,11 @@ for file in "${files[@]}"; do
 done
 
 # Run the MacOS script
-if [[ -f "${macos_dir}/xcode-defaults.sh" ]]; then
-    echo "Running Xcode and defaults setup script..."
-    zsh ${macos_dir}/xcode-defaults.sh
+if [[ -f "${macos_dir}/general.sh" ]]; then
+    echo "Running general setup script..."
+    zsh ${macos_dir}/general.sh
 else
-    echo "'xcode-defaults.sh' not found, skipping..."
+    echo "'general.sh' not found, skipping..."
 fi
 
 # Run the Homebrew script

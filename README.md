@@ -28,13 +28,13 @@ This setup will:
    ```sh
    git clone https://github.com/johansource/dotfiles.git ~/Projects/dotfiles
    ```
-2. Navigate to the `dotfiles` directory:
+2. Navigate to the `dotfiles/setup` directory:
    ```sh
-   cd ~/Projects/dotfiles
+   cd ~/Projects/dotfiles/setup
    ```
 3. Run the setup script for MacOS:
    ```sh
-   zsh ./macos-setup.sh
+   zsh ./macos.sh
    ```
 
 ## <a name="windows"></a> Windows
@@ -45,15 +45,25 @@ This setup will:
 
 ### Setup
 
+Updating execution policy and running the script requires running the terminal as Administrator.
+
 1. Clone the repository to your local machine:
    ```sh
    git clone https://github.com/johansource/dotfiles.git C:/Projects/dotfiles
    ```
-2. Navigate to the `dotfiles` directory:
+2. Navigate to the `dotfiles/setup` directory:
    ```sh
-   cd C:/Projects/dotfiles
+   cd C:/Projects/dotfiles/setup
    ```
-3. Run the setup script for Windows:
+3. Update execution policy to allow running scripts:
    ```ps
-   ./windows-setup.ps1
+   Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+   ```
+4. Run the setup script for Windows:
+   ```ps
+   ./windows.ps1
+   ```
+5. Revert the policy back to its more secure state (optional):
+   ```ps
+   Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Restricted
    ```
