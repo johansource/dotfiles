@@ -148,8 +148,8 @@ To start the Windows setup process, execute the main `windows.ps1` script. The s
       ```
 2. **Revert Execution Policy:**
    - Revert the policy back to its more secure state (optional):
-   ```ps1
-   Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Restricted
-   ```
+      ```ps1
+      Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Restricted
+      ```
 3. **Restart the Terminal:**
    - Restart your terminal to ensure all changes take effect, including environment variable updates and symbolic links.
