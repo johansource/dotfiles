@@ -7,24 +7,33 @@ This repository was created to mostly automate setting up a desired environment 
 1. [Getting started](#getting-started)
 2. [MacOS](#macos)
 3. [Windows](#windows)
+4. [Post-Setup Notes](#post-setup-notes)
 
 ## <a name="getting-started"></a> Getting Started
 
-Do some things and stuff
+This repository helps you quickly set up a new development environment by:
+
+- Installing essential tools and software
+- Configuring applications with customized settings
+- Creating symlinks for dotfiles to maintain consistency across machines.
 
 ## <a name="macos"></a> MacOS
 
 This setup will:
 
-- Create symlinks for dotfiles (`.zshrc`, `.gitconfig`, VS Code `settings.json`, etc.)
-- Run MacOS-specific configurations
-- Install Homebrew packages and casks
-- Configure Visual Studio Code
-- Install Pnpm and the latest LTS version of Node.js
+- Install essential tools using Homebrew (e.g., Git, Node.js, Python, etc.).
+- Configure Visual Studio Code:
+  - Install extensions.
+  - Symlink settings.
+- Set up Pnpm and install the latest LTS version of Node.js.
+- Create symlinks for dotfiles:
+  - `.zshrc`
+  - `.gitconfig`
+  - VS Code `settings.json` and `keybindings.json` (if applicable).
 
 ### Setup
 
-1. Clone the repository to your local machine:
+1. Clone (or manually dowload pre-Git) the repository to your desired local directory:
    ```sh
    git clone https://github.com/johansource/dotfiles.git ~/Projects/dotfiles
    ```
@@ -96,9 +105,9 @@ Updating execution policy and running the script requires running the terminal a
    ```ps1
    git clone https://github.com/johansource/dotfiles.git C:/Projects/dotfiles
    ```
-4. Navigate to the local directory:
+4. Navigate to the `dotfiles/setup` directory:
    ```ps1
-   cd C:/Projects/dotfiles
+   cd C:/Projects/dotfiles/setup
    ```
 
 ### Running the Setup Script
@@ -139,12 +148,19 @@ To start the Windows setup process, execute the main `windows.ps1` script. The s
   - Installs Pnpm
   - Installs Node.js via Pnpm
 
-### Manual Post-Setup Steps
+## <a name="post-setup-notes"></a> Post-Setup Notes
+
+### MacOS-Specific Notes
+
+- Update macOS-specific settings (e.g., Dock preferences) manually if required
+- Install additional Homebrew casks or formulae as needed.
+
+### Windows-Specific Notes
 
 1. **Verify Symlinks:**
    - Ensure all symbolic links (e.g., `.gitconfig`, `wezterm.lua`, `starship.toml`, `Microsoft.PowerShell_profile.ps1`) are created correctly:
       ```ps1
-      Get-Children -Path $env:USERPROFILE\.gitconfig
+      Get-ChildItem -Path $env:USERPROFILE\.gitconfig
       ```
 2. **Revert Execution Policy:**
    - Revert the policy back to its more secure state (optional):
