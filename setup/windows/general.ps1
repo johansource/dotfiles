@@ -288,29 +288,28 @@ function Install-OBS {
     }
 }
 
-# Function to install or update Visual Studio Code using Winget
-function Install-VSCode {
-    Write-Host "Checking Visual Studio Code installation..." -ForegroundColor Cyan
+# Function to create a symbolic link for .gitconfig
+function Symlink-Gitconfig {
+    Write-Host "Setting up symlink for .gitconfig..." -ForegroundColor Cyan
 
-    # Define the expected installation path
-    $vscodePath = "C:\Program Files\Microsoft VS Code\Code.exe"
+    # Define the source and destination paths
+    $dotfilesDir = "$PSScriptRoot\..\.."
+    $gitconfigSource = Join-Path $dotfilesDir "git\.gitconfig"
+    $gitconfigTarget = "$env:USERPROFILE\.gitconfig"
 
-    # Check if VS Code is already installed
-    if (Test-Path $vscodePath) {
-        Write-Host "Visual Studio Code is already installed. Checking for updates..." -ForegroundColor Yellow
-        if (winget upgrade --id Microsoft.VisualStudioCode -e --source winget) {
-            Write-Host "Visual Studio Code has been updated to the latest version." -ForegroundColor Green
-        } else {
-            Write-Host "No updates available for Visual Studio Code." -ForegroundColor Cyan
-        }
-    } else {
-        Write-Host "Visual Studio Code is not installed. Installing Visual Studio Code..." -ForegroundColor Cyan
-        if (Get-Command winget -ErrorAction SilentlyContinue) {
-            winget install --id Microsoft.VisualStudioCode -e --source winget
-            Write-Host "Visual Studio Code has been installed successfully." -ForegroundColor Green
-        } else {
-            Write-Host "Winget is not available. Please install Visual Studio Code manually." -ForegroundColor Red
-        }
+    # Check if the destination already exists
+    if (Test-Path $gitconfigTarget) {
+        Write-Host ".gitconfig already exists at $gitconfigTarget. Removing it to create the symlink..." -ForegroundColor Yellow
+        Remove-Item -Path $gitconfigTarget -Force
+    }
+
+    # Create the symbolic link
+    try {
+        Write-Host "Creating symlink: $gitconfigTarget -> $gitconfigSource" -ForegroundColor Cyan
+        New-Item -ItemType SymbolicLink -Path $gitconfigTarget -Target $gitconfigSource
+        Write-Host ".gitconfig symlink created successfully." -ForegroundColor Green
+    } catch {
+        Write-Host "Error creating symlink for .gitconfig: $_" -ForegroundColor Red
     }
 }
 
@@ -325,6 +324,6 @@ Install-ElgatoWaveLink
 Install-Notion
 Install-VLC
 Install-OBS
-Install-VSCode
+Symlink-Gitconfig
 
 Write-Host "General setup completed!" -ForegroundColor Green

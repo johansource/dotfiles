@@ -4,6 +4,17 @@ local wezterm = require("wezterm")
 -- Use the wezterm config builder for Neovim-style setup
 local config = wezterm.config_builder()
 
+-- Platform-specific default program
+local default_prog
+
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+  -- Windows configuration
+  default_prog = {"powershell.exe"}
+elseif wezterm.target_triple == "x86_64-apple-darwin" then
+  -- macOS configuration
+  default_prog = {"/bin/zsh"} -- Or another shell of your choice
+end
+
 -- Core configuration settings
 config = {
   -- Prevent window resizing when font size changes to keep dimensions consistent
@@ -21,6 +32,9 @@ config = {
   -- Optional: Define cursor blink rate in milliseconds
 	-- cursor_blink_rate = 500,
   default_cursor_style = "BlinkingBar",
+  
+  -- Apply the platform-specific default program
+  default_prog = default_prog,
 
   -- Disable the tab bar since this configuration doesn't use multiple tabs
   enable_tab_bar = false,
