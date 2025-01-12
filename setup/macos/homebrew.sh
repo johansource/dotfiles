@@ -81,7 +81,7 @@ fi
 
 # Define an array of applications to install using Homebrew casks
 apps=(
-    "1password"
+    # "1password"
     "android-studio"
     "arc"
     "blender"
@@ -93,6 +93,7 @@ apps=(
     "notion"
     "obs"
     "pika"
+    "proton-pass"
     "rectangle"
     "spotify"
     "visual-studio-code"
