@@ -82,6 +82,52 @@ function Install-ProtonPass {
     # }
 }
 
+# Function to install or update Proton VPN using Winget
+function Install-ProtonVPN {
+    Write-Host "Checking Proton VPN installation..." -ForegroundColor Cyan
+
+    # Check if Proton VPN CLI is installed
+    if (Get-Command "protonvpn-cli" -ErrorAction SilentlyContinue) {
+        Write-Host "Proton VPN CLI is already installed. Checking for updates..." -ForegroundColor Yellow
+        if (winget upgrade --id ProtonTechnologies.ProtonVPN -e --source winget) {
+            Write-Host "Proton VPN has been updated to the latest version." -ForegroundColor Green
+        } else {
+            Write-Host "No updates available for Proton VPN." -ForegroundColor Cyan
+        }
+    } else {
+        Write-Host "Proton VPN is not installed. Installing Proton VPN..." -ForegroundColor Cyan
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            winget install --id ProtonTechnologies.ProtonVPN -e --source winget
+            Write-Host "Proton VPN has been installed successfully." -ForegroundColor Green
+        } else {
+            Write-Host "Winget is not available. Please install Proton VPN manually." -ForegroundColor Red
+        }
+    }
+}
+
+# Function to install or update Proton Drive using Winget
+function Install-ProtonDrive {
+    Write-Host "Checking Proton Drive installation..." -ForegroundColor Cyan
+
+    # Check if Proton Drive CLI is installed
+    if (Get-Command "protondrive-cli" -ErrorAction SilentlyContinue) {
+        Write-Host "Proton Drive CLI is already installed. Checking for updates..." -ForegroundColor Yellow
+        if (winget upgrade --id ProtonTechnologies.ProtonDrive -e --source winget) {
+            Write-Host "Proton Drive has been updated to the latest version." -ForegroundColor Green
+        } else {
+            Write-Host "No updates available for Proton Drive." -ForegroundColor Cyan
+        }
+    } else {
+        Write-Host "Proton Drive is not installed. Installing Proton Drive..." -ForegroundColor Cyan
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            winget install --id ProtonTechnologies.ProtonDrive -e --source winget
+            Write-Host "Proton Drive has been installed successfully." -ForegroundColor Green
+        } else {
+            Write-Host "Winget is not available. Please install Proton Drive manually." -ForegroundColor Red
+        }
+    }
+}
+
 # Function to install Arc Browser
 #* Not yet available for Winget, custom script
 function Install-ArcBrowser {
@@ -342,6 +388,8 @@ function Symlink-Gitconfig {
 Install-Git
 # Install-1Password
 Install-ProtonPass
+Install-ProtonVPN
+Install-ProtonDrive
 Install-ArcBrowser
 Install-Spotify
 Install-Discord
