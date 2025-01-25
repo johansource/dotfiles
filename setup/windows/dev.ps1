@@ -248,6 +248,58 @@ function Install-Neovim {
     }
 }
 
+# Function to install or update JetBrains Toolbox using Winget
+function Install-JetBrainsToolbox {
+    Write-Host "Checking JetBrains Toolbox installation..." -ForegroundColor Cyan
+
+    # Define the expected installation path for JetBrains Toolbox
+    $toolboxPath = "$env:LocalAppData\JetBrains\Toolbox\bin\jetbrains-toolbox.exe"
+
+    # Check if JetBrains Toolbox is already installed
+    if (Test-Path $toolboxPath) {
+        Write-Host "JetBrains Toolbox is already installed. Checking for updates..." -ForegroundColor Yellow
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Host "Updating JetBrains Toolbox via Winget..." -ForegroundColor Cyan
+            winget upgrade --id JetBrains.Toolbox -e
+        } else {
+            Write-Host "Winget is not available. Please update JetBrains Toolbox manually." -ForegroundColor Red
+            exit 1
+        }
+    } else {
+        # Install JetBrains Toolbox via Winget
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Host "Installing JetBrains Toolbox via Winget..." -ForegroundColor Cyan
+            winget install --id JetBrains.Toolbox -e
+        } else {
+            Write-Host "Winget is not available. Please install JetBrains Toolbox manually." -ForegroundColor Red
+            exit 1
+        }
+    }
+
+    # Verify the JetBrains Toolbox installation path
+    if (-not (Test-Path $toolboxPath)) {
+        Write-Host "Error: JetBrains Toolbox executable not found at $toolboxPath. Please verify the installation." -ForegroundColor Red
+        exit 1
+    }
+
+    # Temporarily add JetBrains Toolbox to the current session PATH if not already added
+    $toolboxBinPath = "$env:LocalAppData\JetBrains\Toolbox\bin"
+    if ($toolboxBinPath -notin ($env:Path -split ';')) {
+        $env:Path += ";$toolboxBinPath"
+        Write-Host "JetBrains Toolbox bin path added to the current session PATH." -ForegroundColor Green
+    } else {
+        Write-Host "JetBrains Toolbox bin path is already in the current session PATH." -ForegroundColor Yellow
+    }
+
+    # Verify installation
+    if (Test-Path $toolboxPath) {
+        Write-Host "JetBrains Toolbox has been installed or updated successfully." -ForegroundColor Green
+    } else {
+        Write-Host "JetBrains Toolbox installation failed. Please troubleshoot." -ForegroundColor Red
+        exit 1
+    }
+}
+
 # Function to install DevToys using Winget
 function Install-Devtoys {
     Write-Host "Checking DevToys installation..." -ForegroundColor Cyan
@@ -429,6 +481,7 @@ Install-Starship
 Install-VSCode
 Install-VisualStudio
 Install-Neovim
+Install-JetBrainsToolbox
 Install-Devtoys
 Install-Fonts
 Symlink-Wezterm

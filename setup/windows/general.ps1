@@ -307,6 +307,58 @@ function Install-Notion {
     }
 }
 
+# Function to install or update Obsidian using Winget
+function Install-Obsidian {
+    Write-Host "Checking Obsidian installation..." -ForegroundColor Cyan
+
+    # Define the expected installation path for Obsidian
+    $obsidianPath = "$env:LocalAppData\Obsidian\Obsidian.exe"
+
+    # Check if Obsidian is already installed
+    if (Test-Path $obsidianPath) {
+        Write-Host "Obsidian is already installed. Checking for updates..." -ForegroundColor Yellow
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Host "Updating Obsidian via Winget..." -ForegroundColor Cyan
+            winget upgrade --id Obsidian.Obsidian -e
+        } else {
+            Write-Host "Winget is not available. Please update Obsidian manually." -ForegroundColor Red
+            exit 1
+        }
+    } else {
+        # Install Obsidian via Winget
+        if (Get-Command winget -ErrorAction SilentlyContinue) {
+            Write-Host "Installing Obsidian via Winget..." -ForegroundColor Cyan
+            winget install --id Obsidian.Obsidian -e
+        } else {
+            Write-Host "Winget is not available. Please install Obsidian manually." -ForegroundColor Red
+            exit 1
+        }
+    }
+
+    # Verify the Obsidian installation path
+    if (-not (Test-Path $obsidianPath)) {
+        Write-Host "Error: Obsidian executable not found at $obsidianPath. Please verify the installation." -ForegroundColor Red
+        exit 1
+    }
+
+    # Temporarily add Obsidian to the current session PATH if not already added
+    $obsidianBinPath = "$env:LocalAppData\Obsidian"
+    if ($obsidianBinPath -notin ($env:Path -split ';')) {
+        $env:Path += ";$obsidianBinPath"
+        Write-Host "Obsidian bin path added to the current session PATH." -ForegroundColor Green
+    } else {
+        Write-Host "Obsidian bin path is already in the current session PATH." -ForegroundColor Yellow
+    }
+
+    # Verify installation
+    if (Test-Path $obsidianPath) {
+        Write-Host "Obsidian has been installed or updated successfully." -ForegroundColor Green
+    } else {
+        Write-Host "Obsidian installation failed. Please troubleshoot." -ForegroundColor Red
+        exit 1
+    }
+}
+
 # Function to install or update VLC Media Player using Winget
 function Install-VLC {
     Write-Host "Checking VLC installation..." -ForegroundColor Cyan
@@ -396,6 +448,7 @@ Install-Discord
 Install-LogitechGHub
 Install-ElgatoWaveLink
 Install-Notion
+Install-Obsidian
 Install-VLC
 Install-OBS
 Symlink-Gitconfig
