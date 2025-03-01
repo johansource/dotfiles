@@ -9,14 +9,14 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   exit 1
 }
 
-Write-Host "Starting WezTerm setup..." -ForegroundColor Green
+Write-Host "Starting Starship setup..." -ForegroundColor Green
 
 # Function to install Starship
 function Install-Starship {
   Write-Host "Checking Starship installation..." -ForegroundColor Cyan
 
   # Define the expected installation path
-  $starshipPath = "$env:USERPROFILE\.cargo\bin\starship.exe"
+  $starshipPath = "C:\Program Files\Starship\bin\starship.exe"
 
   # Check if Starship is already installed
   if (Test-Path $starshipPath) {
@@ -24,12 +24,12 @@ function Install-Starship {
       return
   }
 
-  # Download and run the Starship installation script
-  try {
-      Invoke-WebRequest https://starship.rs/install.ps1 -UseBasicParsing | Invoke-Expression
-      Write-Host "Starship installation script executed successfully." -ForegroundColor Green
-  } catch {
-      Write-Host "Error: Failed to execute the Starship installation script." -ForegroundColor Red
+  # Install Starship via Winget
+  if (Get-Command winget -ErrorAction SilentlyContinue) {
+      Write-Host "Installing Starship via Winget..." -ForegroundColor Cyan
+      winget install --id Starship.Starship -e --source winget
+  } else {
+      Write-Host "Winget is not available. Please install Starship manually." -ForegroundColor Red
       exit 1
   }
 
@@ -40,19 +40,19 @@ function Install-Starship {
   }
 
   # Add Starship to the global PATH
-  $cargoBinPath = "$env:USERPROFILE\.cargo\bin"
+  $starshipBinPath = "C:\Program Files\Starship\bin"
   $currentPath = [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine)
-  if ($cargoBinPath -notin ($currentPath -split ';')) {
-      [Environment]::SetEnvironmentVariable("Path", $currentPath + ";" + $cargoBinPath, [EnvironmentVariableTarget]::Machine)
-      Write-Host "Starship's cargo bin path added to the global PATH." -ForegroundColor Green
+  if ($starshipBinPath -notin ($currentPath -split ';')) {
+      [Environment]::SetEnvironmentVariable("Path", $currentPath + ";" + $starshipBinPath, [EnvironmentVariableTarget]::Machine)
+      Write-Host "Starship's bin path added to the global PATH." -ForegroundColor Green
   } else {
-      Write-Host "Starship's cargo bin path is already in the global PATH." -ForegroundColor DarkYellow
+      Write-Host "Starship's bin path is already in the global PATH." -ForegroundColor DarkYellow
   }
 
   # Temporarily add Starship to the current session PATH
-  if ($cargoBinPath -notin ($env:Path -split ';')) {
-      $env:Path += ";$cargoBinPath"
-      Write-Host "Starship's cargo bin path added to the current session PATH." -ForegroundColor Green
+  if ($starshipBinPath -notin ($env:Path -split ';')) {
+      $env:Path += ";$starshipBinPath"
+      Write-Host "Starship's bin path added to the current session PATH." -ForegroundColor Green
   }
 
   # Verify installation
@@ -69,7 +69,7 @@ function Symlink-Starship {
   Write-Host "Setting up symlink for starship.toml..." -ForegroundColor Cyan
 
   # Define the source and destination paths
-  $dotfilesDir = "$PSScriptRoot\..\.."
+  $dotfilesDir = "$PSScriptRoot\..\..\.."
   $starshipSource = Join-Path $dotfilesDir "starship\starship.toml"
   $starshipConfigDir = "$env:USERPROFILE\.config"
   $starshipTarget = Join-Path $starshipConfigDir "starship.toml"

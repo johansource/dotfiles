@@ -16,8 +16,8 @@ function Symlink-PowerShellProfile {
 
   # Define source and target paths
   $dotfilesDir = "$PSScriptRoot\..\..\.."
-  $profileSource = Join-Path $dotfilesDir "powershell\Microsoft.PowerShell_profile.ps1"
-  $profileTargetDir = Join-Path "$env:USERPROFILE\Documents" "PowerShell"
+  $profileSource = Join-Path $dotfilesDir "windowspowershell\Microsoft.PowerShell_profile.ps1"
+  $profileTargetDir = Join-Path "$env:USERPROFILE\Documents" "WindowsPowerShell"
   $profileTarget = Join-Path $profileTargetDir "Microsoft.PowerShell_profile.ps1"
 
   # Ensure the PowerShell directory exists

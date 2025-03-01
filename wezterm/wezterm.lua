@@ -6,13 +6,16 @@ local config = wezterm.config_builder()
 
 -- Platform-specific default program
 local default_prog
+local window_decorations
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   -- Windows configuration
   default_prog = {"powershell.exe"}
+  window_decorations = "TITLE | RESIZE"
 elseif wezterm.target_triple == "x86_64-apple-darwin" then
   -- macOS configuration
   default_prog = {"/bin/zsh"} -- Or another shell of your choice
+  window_decorations = "RESIZE"
 end
 
 -- Core configuration settings
@@ -57,7 +60,7 @@ config = {
   window_close_confirmation = "NeverPrompt",
 
   -- Disable all window decorations except resize
-  window_decorations = "RESIZE",
+  window_decorations = window_decorations,
 
   -- Define padding around the terminal content for visual comfort
 	window_padding = {
