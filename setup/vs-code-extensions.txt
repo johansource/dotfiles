@@ -35,12 +35,14 @@ ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-vscode.cmake-tools
 ms-vscode.cpptools
+ms-vscode.powershell
 ms-vscode-remote.remote-containers
 msjsdiag.vscode-react-native
 njpwerner.autodocstring
 pkief.material-icon-theme
 pranaygp.vscode-css-peek
 redhat.vscode-yaml
+shd101wyy.markdown-preview-enhanced
 slevesque.shader
 tamasfe.even-better-toml
 usernamehw.errorlens

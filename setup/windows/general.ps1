@@ -34,6 +34,31 @@ function Install-Git {
     }
 }
 
+# Function to create a symbolic link for .gitconfig
+function Symlink-Gitconfig {
+    Write-Host "Setting up symlink for .gitconfig..." -ForegroundColor Cyan
+
+    # Define the source and destination paths
+    $dotfilesDir = "$PSScriptRoot\..\.."
+    $gitconfigSource = Join-Path $dotfilesDir "git\.gitconfig"
+    $gitconfigTarget = "$env:USERPROFILE\.gitconfig"
+
+    # Check if the destination already exists
+    if (Test-Path $gitconfigTarget) {
+        Write-Host ".gitconfig already exists at $gitconfigTarget. Removing it to create the symlink..." -ForegroundColor Yellow
+        Remove-Item -Path $gitconfigTarget -Force
+    }
+
+    # Create the symbolic link
+    try {
+        Write-Host "Creating symlink: $gitconfigTarget -> $gitconfigSource" -ForegroundColor Cyan
+        New-Item -ItemType SymbolicLink -Path $gitconfigTarget -Target $gitconfigSource
+        Write-Host ".gitconfig symlink created successfully." -ForegroundColor Green
+    } catch {
+        Write-Host "Error creating symlink for .gitconfig: $_" -ForegroundColor Red
+    }
+}
+
 # Function to install or update 1Password using Winget
 function Install-1Password {
     Write-Host "Checking 1Password installation..." -ForegroundColor Cyan
@@ -411,33 +436,9 @@ function Install-OBS {
     }
 }
 
-# Function to create a symbolic link for .gitconfig
-function Symlink-Gitconfig {
-    Write-Host "Setting up symlink for .gitconfig..." -ForegroundColor Cyan
-
-    # Define the source and destination paths
-    $dotfilesDir = "$PSScriptRoot\..\.."
-    $gitconfigSource = Join-Path $dotfilesDir "git\.gitconfig"
-    $gitconfigTarget = "$env:USERPROFILE\.gitconfig"
-
-    # Check if the destination already exists
-    if (Test-Path $gitconfigTarget) {
-        Write-Host ".gitconfig already exists at $gitconfigTarget. Removing it to create the symlink..." -ForegroundColor Yellow
-        Remove-Item -Path $gitconfigTarget -Force
-    }
-
-    # Create the symbolic link
-    try {
-        Write-Host "Creating symlink: $gitconfigTarget -> $gitconfigSource" -ForegroundColor Cyan
-        New-Item -ItemType SymbolicLink -Path $gitconfigTarget -Target $gitconfigSource
-        Write-Host ".gitconfig symlink created successfully." -ForegroundColor Green
-    } catch {
-        Write-Host "Error creating symlink for .gitconfig: $_" -ForegroundColor Red
-    }
-}
-
 # Call installation functions
 Install-Git
+Symlink-Gitconfig
 # Install-1Password
 Install-ProtonPass
 Install-ProtonVPN
@@ -451,6 +452,5 @@ Install-Notion
 Install-Obsidian
 Install-VLC
 Install-OBS
-Symlink-Gitconfig
 
 Write-Host "General setup completed!" -ForegroundColor Green

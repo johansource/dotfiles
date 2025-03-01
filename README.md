@@ -95,8 +95,12 @@ Updating execution policy and running the script requires running the terminal a
 
 1. Ensure you have the following installed:
    - **PowerShell 7+** (comes pre-installed with Windows 10/11).
-   - **Git** (will be installed by the `general.ps1` script if not already installed).
    - **Winget** (Windows Package Manager, included with Windows 11).
+   - **Git** (will be installed by the `general.ps1` script if not already installed).
+     - To preemptively install Git the same way the script would, run this Winget command:
+        ```ps1
+        winget install --id Git.Git -e --source winget
+        ```
 2. Update execution policy to allow running scripts:
    ```ps1
    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
