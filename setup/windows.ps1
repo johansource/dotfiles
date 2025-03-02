@@ -8,7 +8,7 @@ param (
     [switch]$Gaming,
     [switch]$GameDev,
     [switch]$Python,
-    [switch]$NodeJs
+    [switch]$Js
 )
 
 # Ensure script is running as Administrator
@@ -27,7 +27,8 @@ $generalScript = Join-Path $scriptDir "windows\general.ps1"
 if (Test-Path $generalScript) {
     Write-Host "Running general setup..." -ForegroundColor Cyan
     & $generalScript
-} else {
+}
+else {
     Write-Host "Error: General setup script not found at $generalScript" -ForegroundColor Red
 }
 
@@ -37,7 +38,8 @@ if ($Dev) {
     if (Test-Path $devScript) {
         Write-Host "Running development setup..." -ForegroundColor Cyan
         & $devScript
-    } else {
+    }
+    else {
         Write-Host "Error: Development setup script not found at $devScript" -ForegroundColor Red
     }
 }
@@ -48,7 +50,8 @@ if ($Gaming) {
     if (Test-Path $gamingScript) {
         Write-Host "Running gaming setup..." -ForegroundColor Cyan
         & $gamingScript
-    } else {
+    }
+    else {
         Write-Host "Error: Gaming setup script not found at $gamingScript" -ForegroundColor Red
     }
 }
@@ -59,7 +62,8 @@ if ($GameDev) {
     if (Test-Path $gameDevScript) {
         Write-Host "Running game development setup..." -ForegroundColor Cyan
         & $gameDevScript
-    } else {
+    }
+    else {
         Write-Host "Error: Game development setup script not found at $gameDevScript" -ForegroundColor Red
     }
 }
@@ -70,19 +74,21 @@ if ($Python) {
     if (Test-Path $pythonScript) {
         Write-Host "Running Python setup..." -ForegroundColor Cyan
         & $pythonScript
-    } else {
+    }
+    else {
         Write-Host "Error: Python setup script not found at $pythonScript" -ForegroundColor Red
     }
 }
 
-# Call the Pnpm & Node.js setup script only if NodeJs flag is provided
-if ($NodeJs) {
-    $pnpmNodeScript = Join-Path $scriptDir "windows\pnpm-node.ps1"
-    if (Test-Path $pnpmNodeScript) {
-        Write-Host "Running Pnpm & Node.js setup..." -ForegroundColor Cyan
-        & $pnpmNodeScript
-    } else {
-        Write-Host "Error: Pnpm & Node.js setup script not found at $pnpmNodeScript" -ForegroundColor Red
+# Call the JavaScript-environment setup script only if Js flag is provided
+if ($Js) {
+    $jsScript = Join-Path $scriptDir "windows\js.ps1"
+    if (Test-Path $jsScript) {
+        Write-Host "Running Js setup..." -ForegroundColor Cyan
+        & $jsScript
+    }
+    else {
+        Write-Host "Error: Js setup script not found at $jsScript" -ForegroundColor Red
     }
 }
 

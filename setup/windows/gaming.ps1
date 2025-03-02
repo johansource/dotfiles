@@ -11,34 +11,16 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 Write-Host "Starting gaming setup..." -ForegroundColor Green
 
-# Function to install Steam using Winget
-function Install-Steam {
-    Write-Host "Checking Steam installation..." -ForegroundColor Cyan
+# Define the path to the scripts using $PSScriptRoot
+$steamScript = Join-Path $PSScriptRoot "gaming/steam.ps1"
 
-    $steamPath = "$env:ProgramFiles (x86)\Steam\Steam.exe"
-
-    if (Test-Path $steamPath) {
-        Write-Host "Steam is already installed. Skipping installation..." -ForegroundColor Yellow
-        return
-    }
-
-    if (Get-Command winget -ErrorAction SilentlyContinue) {
-        Write-Host "Installing Steam via Winget..." -ForegroundColor Cyan
-        winget install --id Valve.Steam -e
-    } else {
-        Write-Host "Winget is not available. Please install Steam manually." -ForegroundColor Red
-        exit 1
-    }
-
-    if (-not (Test-Path $steamPath)) {
-        Write-Host "Error: Steam installation failed or not found at $steamPath. Please troubleshoot." -ForegroundColor Red
-        exit 1
-    }
-
-    Write-Host "Steam installed successfully." -ForegroundColor Green
+# Call the Steam setup script
+if (Test-Path $steamScript) {
+    Write-Host "Running Steam setup..." -ForegroundColor Cyan
+    & $steamScript
 }
-
-# Call installation functions
-Install-Steam
+else {
+    Write-Host "Error: Steam setup script not found at $steamScript" -ForegroundColor Red
+}
 
 Write-Host "Gaming setup completed!" -ForegroundColor Green

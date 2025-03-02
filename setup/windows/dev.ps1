@@ -13,69 +13,56 @@ Write-Host "Starting development setup..." -ForegroundColor Green
 
 # Define the path to the scripts using $PSScriptRoot
 $devFontsScript = Join-Path $PSScriptRoot "dev/dev-fonts.ps1"
-$weztermScript  = Join-Path $PSScriptRoot "dev/wezterm.ps1"
+$weztermScript = Join-Path $PSScriptRoot "dev/wezterm.ps1"
 $starshipScript = Join-Path $PSScriptRoot "dev/starship.ps1"
-$vsCodeScript   = Join-Path $PSScriptRoot "dev/vs-code.ps1"
-$vsCodeExtensionsScript   = Join-Path $PSScriptRoot "dev/vs-code-extensions.ps1"
-$vsCodeSymlinksScript   = Join-Path $PSScriptRoot "dev/vs-code-symlinks.ps1"
-$visualStudioScript   = Join-Path $PSScriptRoot "dev/visual-studio.ps1"
+$vsCodeScript = Join-Path $PSScriptRoot "dev/vs-code.ps1"
+$visualStudioScript = Join-Path $PSScriptRoot "dev/visual-studio.ps1"
 $devtoysScript = Join-Path $PSScriptRoot "dev/devtoys.ps1"
 $jetbrainsToolboxScript = Join-Path $PSScriptRoot "dev/jetbrains-toolbox.ps1"
-$powershellSymlinksScript   = Join-Path $PSScriptRoot "dev/powershell-symlinks.ps1"
+$powershellSymlinksScript = Join-Path $PSScriptRoot "dev/powershell-symlinks.ps1"
 
 # Call the Fonts setup script
 if (Test-Path $devFontsScript) {
-   Write-Host "Running Fonts setup..." -ForegroundColor Cyan
-   & $devFontsScript
-} else {
-   Write-Host "Error: Fonts setup script not found at $devFontsScript" -ForegroundColor Red
+    Write-Host "Running Fonts setup..." -ForegroundColor Cyan
+    & $devFontsScript
+}
+else {
+    Write-Host "Error: Fonts setup script not found at $devFontsScript" -ForegroundColor Red
 }
 
 # Call the WezTerm setup script
 if (Test-Path $weztermScript) {
-   Write-Host "Running WezTerm setup..." -ForegroundColor Cyan
-   & $weztermScript
-} else {
-   Write-Host "Error: WezTerm setup script not found at $weztermScript" -ForegroundColor Red
+    Write-Host "Running WezTerm setup..." -ForegroundColor Cyan
+    & $weztermScript
+}
+else {
+    Write-Host "Error: WezTerm setup script not found at $weztermScript" -ForegroundColor Red
 }
 
 # Call the Starship setup script
 if (Test-Path $starshipScript) {
-   Write-Host "Running Starship setup..." -ForegroundColor Cyan
-   & $starshipScript
-} else {
-   Write-Host "Error: Starship setup script not found at $starshipScript" -ForegroundColor Red
+    Write-Host "Running Starship setup..." -ForegroundColor Cyan
+    & $starshipScript
+}
+else {
+    Write-Host "Error: Starship setup script not found at $starshipScript" -ForegroundColor Red
 }
 
 # Call the VS Code setup script
 if (Test-Path $vsCodeScript) {
     Write-Host "Running Visual Studio Code setup..." -ForegroundColor Cyan
     & $vsCodeScript
-} else {
+}
+else {
     Write-Host "Error: Visual Studio Code setup script not found at $vsCodeScript" -ForegroundColor Red
-}
-
-# Call the VS Code extensions setup script
-if (Test-Path $vsCodeExtensionsScript) {
-    Write-Host "Running Visual Studio Code extensions setup..." -ForegroundColor Cyan
-    & $vsCodeExtensionsScript
-} else {
-    Write-Host "Error: Visual Studio Code extensions setup script not found at $vsCodeExtensionsScript" -ForegroundColor Red
-}
-
-# Call the VS Code symlinks setup script
-if (Test-Path $vsCodeSymlinksScript) {
-    Write-Host "Running Visual Studio Code symlinks setup..." -ForegroundColor Cyan
-    & $vsCodeSymlinksScript
-} else {
-    Write-Host "Error: Visual Studio Code symlinks setup script not found at $vsCodeSymlinksScript" -ForegroundColor Red
 }
 
 # Call the Visual Studio setup script
 if (Test-Path $visualStudioScript) {
     Write-Host "Running Visual Studio setup..." -ForegroundColor Cyan
     & $visualStudioScript
-} else {
+}
+else {
     Write-Host "Error: Visual Studio setup script not found at $visualStudioScript" -ForegroundColor Red
 }
 
@@ -83,7 +70,8 @@ if (Test-Path $visualStudioScript) {
 if (Test-Path $devtoysScript) {
     Write-Host "Running Devtoys setup..." -ForegroundColor Cyan
     & $devtoysScript
-} else {
+}
+else {
     Write-Host "Error: Devtoys setup script not found at $devtoysScript" -ForegroundColor Red
 }
 
@@ -91,7 +79,8 @@ if (Test-Path $devtoysScript) {
 if (Test-Path $jetbrainsToolboxScript) {
     Write-Host "Running Jetbrains Toolbox setup..." -ForegroundColor Cyan
     & $jetbrainsToolboxScript
-} else {
+}
+else {
     Write-Host "Error: Jetbrains Toolbox setup script not found at $jetbrainsToolboxScript" -ForegroundColor Red
 }
 
@@ -99,7 +88,8 @@ if (Test-Path $jetbrainsToolboxScript) {
 if (Test-Path $powershellSymlinksScript) {
     Write-Host "Running Powershell symlinks setup..." -ForegroundColor Cyan
     & $powershellSymlinksScript
-} else {
+}
+else {
     Write-Host "Error: Powershell symlinks setup script not found at $powershellSymlinksScript" -ForegroundColor Red
 }
 

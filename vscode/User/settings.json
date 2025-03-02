@@ -72,5 +72,8 @@
   "[ignore]": {
     "editor.tabSize": 4,
     "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
   }
 }
