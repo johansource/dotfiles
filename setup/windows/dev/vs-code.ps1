@@ -151,4 +151,4 @@ Install-VSCode
 Install-VSCodeExtensions
 Symlink-VSCodeConfig
 
-Write-Host "Visual Studio Code and externsions has been installed, and symlinks created." -ForegroundColor Green
+Write-Host "Visual Studio Code and extensions has been installed, and symlinks created." -ForegroundColor Green

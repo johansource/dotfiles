@@ -20,6 +20,7 @@ $visualStudioScript = Join-Path $PSScriptRoot "dev/visual-studio.ps1"
 $devtoysScript = Join-Path $PSScriptRoot "dev/devtoys.ps1"
 $jetbrainsToolboxScript = Join-Path $PSScriptRoot "dev/jetbrains-toolbox.ps1"
 $powershellSymlinksScript = Join-Path $PSScriptRoot "dev/powershell-symlinks.ps1"
+$podmanScript = Join-Path $PSScriptRoot "dev/podman.ps1"
 
 # Call the Fonts setup script
 if (Test-Path $devFontsScript) {
@@ -84,13 +85,22 @@ else {
     Write-Host "Error: Jetbrains Toolbox setup script not found at $jetbrainsToolboxScript" -ForegroundColor Red
 }
 
-# Call the Jetbrains Toolbox setup script
+# Call the Powershell symlinks setup script
 if (Test-Path $powershellSymlinksScript) {
     Write-Host "Running Powershell symlinks setup..." -ForegroundColor Cyan
     & $powershellSymlinksScript
 }
 else {
     Write-Host "Error: Powershell symlinks setup script not found at $powershellSymlinksScript" -ForegroundColor Red
+}
+
+# Call the Podman setup script
+if (Test-Path $podmanScript) {
+    Write-Host "Running Podman setup..." -ForegroundColor Cyan
+    & $podmanScript
+}
+else {
+    Write-Host "Error: Podman setup script not found at $podmanScript" -ForegroundColor Red
 }
 
 Write-Host "Development setup completed!" -ForegroundColor Green

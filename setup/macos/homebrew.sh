@@ -34,13 +34,14 @@ brew upgrade
 brew upgrade --cask
 brew cleanup
 
-# Define an array of packages to install using Homebrew
-packages=(
+# Define an array of tools to install using Homebrew formulae
+formulae=(
     "cocoapods"
     "git"
     "nvim"
     "openjdk"
     "python"
+    "podman"
     "poetry"
     "pyenv"
     "starship"
@@ -53,12 +54,12 @@ packages=(
 )
 
 # Loop over the array to install each application.
-for package in "${packages[@]}"; do
-    if brew list --formula | grep -q "^$package\$"; then
-        echo "$package is already installed. Skipping..."
+for item in "${formulae[@]}"; do
+    if brew list --formula | grep -q "^$item\$"; then
+        echo "$item is already installed. Skipping..."
     else
-        echo "Installing $package..."
-        brew install "$package"
+        echo "Installing $item..."
+        brew install "$item"
     fi
 done
 
@@ -80,14 +81,14 @@ else
 fi
 
 # Define an array of applications to install using Homebrew casks
-apps=(
+casks=(
     # "1password"
     "android-studio"
     "arc"
     "blender"
     "devtoys"
     "discord"
-    "docker"
+    # "docker"
     "figma"
     "iina"
     "jetbrains-toolbox"
@@ -95,6 +96,7 @@ apps=(
     "obs"
     "obsidian"
     "pika"
+    "podman-desktop"
     "proton-drive"
     "proton-pass"
     "protonvpn"
@@ -105,16 +107,16 @@ apps=(
 )
 
 # Loop over the array to install each application
-for app in "${apps[@]}"; do
-    if brew list --cask | grep -q "^$app\$"; then
-        echo "$app is already installed. Skipping..."
+for item in "${casks[@]}"; do
+    if brew list --cask | grep -q "^$item\$"; then
+        echo "$item is already installed. Skipping..."
     else
-        echo "Installing $app..."
-        brew install --cask "$app"
+        echo "Installing $item..."
+        brew install --cask "$item"
     fi
 done
 
-# Define an array of applications to install using Homebrew casks
+# Define an array of fonts to install using Homebrew casks
 fonts=(
     "font-jetbrains-mono"
     # For symbols in VS Code terminal
@@ -123,13 +125,13 @@ fonts=(
 )
 
 # Loop over the array to install each font
-for font in "${fonts[@]}"; do
+for item in "${fonts[@]}"; do
     # Check if the font is already installed
-    if brew list --cask | grep -q "^$font\$"; then
-        echo "$font is already installed. Skipping..."
+    if brew list --cask | grep -q "^$item\$"; then
+        echo "$item is already installed. Skipping..."
     else
-        echo "Installing $font..."
-        brew install --cask "$font"
+        echo "Installing $item..."
+        brew install --cask "$item"
     fi
 done
 
