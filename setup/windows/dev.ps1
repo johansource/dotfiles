@@ -21,6 +21,7 @@ $devtoysScript = Join-Path $PSScriptRoot "dev/devtoys.ps1"
 $jetbrainsToolboxScript = Join-Path $PSScriptRoot "dev/jetbrains-toolbox.ps1"
 $powershellSymlinksScript = Join-Path $PSScriptRoot "dev/powershell-symlinks.ps1"
 $podmanScript = Join-Path $PSScriptRoot "dev/podman.ps1"
+$dbeaverScript = Join-Path $PSScriptRoot "dev/dbeaver.ps1"
 
 # Call the Fonts setup script
 if (Test-Path $devFontsScript) {
@@ -101,6 +102,15 @@ if (Test-Path $podmanScript) {
 }
 else {
     Write-Host "Error: Podman setup script not found at $podmanScript" -ForegroundColor Red
+}
+
+# Call the DBeaver setup script
+if (Test-Path $dbeaverScript) {
+    Write-Host "Running DBeaver setup..." -ForegroundColor Cyan
+    & $dbeaverScript
+}
+else {
+    Write-Host "Error: DBeaver setup script not found at $dbeaverScript" -ForegroundColor Red
 }
 
 Write-Host "Development setup completed!" -ForegroundColor Green

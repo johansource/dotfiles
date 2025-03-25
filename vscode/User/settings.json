@@ -75,5 +75,11 @@
   },
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }
