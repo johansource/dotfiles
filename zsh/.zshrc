@@ -72,8 +72,10 @@ plugins=(git)
 # User configuration
 
 # Starship
+
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
+
 # Starship end
 
 # Zsh syntax highlighting
@@ -106,22 +108,28 @@ export PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig"
 # Python end
 
 # Pnpm
+
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
 *":$PNPM_HOME:"*) ;;
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
 # Pnpm end
 
 # Java
+
 export JAVA_HOME="$(brew --prefix openjdk)"
 export PATH="$JAVA_HOME/bin:$PATH"
 export CPPFLAGS="-I$(brew --prefix openjdk)/include"
+
 # Java end
 
 # Android Studio
+
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin"
+
 # Android Studio end
 
 # export MANPATH="/usr/local/man:$MANPATH"

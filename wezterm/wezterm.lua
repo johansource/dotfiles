@@ -14,7 +14,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   window_decorations = "TITLE | RESIZE"
 elseif wezterm.target_triple == "x86_64-apple-darwin" then
   -- macOS configuration
-  default_prog = {"/bin/zsh"} -- Or another shell of your choice
+  default_prog = { "/usr/local/bin/zsh", "-l" } -- Or another shell of your choice
   window_decorations = "RESIZE"
 end
 

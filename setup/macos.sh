@@ -23,6 +23,7 @@ cd "${dotfiles_dir}" || exit
 # List of source files and target locations
 files=(
     "git/.gitconfig:${HOME}/.gitconfig"
+    "zsh/.zprofile:${HOME}/.zprofile"
     "zsh/.zshrc:${HOME}/.zshrc"
     "wezterm/wezterm.lua:${HOME}/.config/wezterm/wezterm.lua"
     "starship/starship.toml:${HOME}/.config/starship.toml"
