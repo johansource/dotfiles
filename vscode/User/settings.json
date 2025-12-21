@@ -81,5 +81,18 @@
   },
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "gitlens.views.scm.grouped.hiddenViews": {
+    "commits": true,
+    "worktrees": true,
+    "branches": false,
+    "remotes": false,
+    "stashes": false,
+    "tags": true,
+    "contributors": true,
+    "repositories": true,
+    "fileHistory": true,
+    "launchpad": true,
+    "searchAndCompare": false
   }
 }
