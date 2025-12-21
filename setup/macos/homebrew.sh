@@ -93,7 +93,7 @@ casks=(
     "figma"
     "iina"
     "jetbrains-toolbox"
-    "notion"
+    # "notion"
     "obs"
     "obsidian"
     "pika"
