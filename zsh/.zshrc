@@ -74,36 +74,53 @@ plugins=(git)
 # Starship
 
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init zsh)"
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
 
 # Starship end
 
-# Zsh syntax highlighting
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if command -v brew >/dev/null 2>&1; then
+  # Zsh syntax highlighting
+  if [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  fi
 
-# Disable underline
-# (( ${+ZSH_HIGHLIGHT_STYLES})) || typeset -A ZSH_HIGHLIGHT_STYLES
-declare -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[path]=none
-ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+  # Disable underline
+  # (( ${+ZSH_HIGHLIGHT_STYLES})) || typeset -A ZSH_HIGHLIGHT_STYLES
+  declare -A ZSH_HIGHLIGHT_STYLES
+  ZSH_HIGHLIGHT_STYLES[path]=none
+  ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
-# Activate autosuggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  # Activate autosuggestions
+  if [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  fi
+fi
 
 # Python
 
 # Pyenv setup
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+if [ -d "$PYENV_ROOT" ]; then
+  export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+fi
 
 # Poetry setup (adds Poetry to PATH)
 export PATH="$HOME/.local/bin:$PATH"
 
 # Tkinter setup (tcl-tk dependencies)
-export LDFLAGS="-L$(brew --prefix tcl-tk)/lib"
-export CPPFLAGS="-I$(brew --prefix tcl-tk)/include"
-export PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig"
+if command -v brew >/dev/null 2>&1; then
+  if brew --prefix tcl-tk >/dev/null 2>&1; then
+    export LDFLAGS="-L$(brew --prefix tcl-tk)/lib"
+    export CPPFLAGS="-I$(brew --prefix tcl-tk)/include"
+    export PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig"
+  fi
+fi
 
 # Python end
 
@@ -119,9 +136,13 @@ esac
 
 # Java
 
-export JAVA_HOME="$(brew --prefix openjdk)"
-export PATH="$JAVA_HOME/bin:$PATH"
-export CPPFLAGS="-I$(brew --prefix openjdk)/include"
+if command -v brew >/dev/null 2>&1; then
+  if brew --prefix openjdk >/dev/null 2>&1; then
+    export JAVA_HOME="$(brew --prefix openjdk)"
+    export PATH="$JAVA_HOME/bin:$PATH"
+    export CPPFLAGS="-I$(brew --prefix openjdk)/include"
+  fi
+fi
 
 # Java end
 
