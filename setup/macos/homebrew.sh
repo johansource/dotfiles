@@ -90,6 +90,7 @@ casks=(
     "devtoys"
     "discord"
     # "docker"
+    "dotnet-sdk"
     "figma"
     "iina"
     "jetbrains-toolbox"
