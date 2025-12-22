@@ -81,9 +81,13 @@ fi
 # Starship end
 
 if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX="$(brew --prefix)"
+
+  # Zsh
+
   # Zsh syntax highlighting
-  if [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  if [ -f "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
   fi
 
   # Disable underline
@@ -93,65 +97,39 @@ if command -v brew >/dev/null 2>&1; then
   ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
   # Activate autosuggestions
-  if [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  if [ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
   fi
+
+  # Zsh end
+
+  # Python Tkinter setup (tcl-tk dependencies)
+
+  TCL_TK_PREFIX="$(brew --prefix tcl-tk 2>/dev/null)"
+  if [ -n "$TCL_TK_PREFIX" ] && [ -d "$TCL_TK_PREFIX" ]; then
+    export LDFLAGS="${LDFLAGS:+$LDFLAGS }-L$TCL_TK_PREFIX/lib"
+    export CPPFLAGS="${CPPFLAGS:+$CPPFLAGS }-I$TCL_TK_PREFIX/include"
+    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+$PKG_CONFIG_PATH:}$TCL_TK_PREFIX/lib/pkgconfig"
+  fi
+
+  # Python Tkinter end
+
+  # Java (CPPFLAGS only; JAVA_HOME/PATH handled in .zprofile)
+
+  if [ -n "${JAVA_HOME:-}" ] && [ -d "$JAVA_HOME" ]; then
+    export CPPFLAGS="${CPPFLAGS:+$CPPFLAGS }-I$JAVA_HOME/include"
+  fi
+
+  # Java end
+
 fi
 
 # Python
 
 # Pyenv setup
-export PYENV_ROOT="$HOME/.pyenv"
-if [ -d "$PYENV_ROOT" ]; then
-  export PATH="$PYENV_ROOT/bin:$PATH"
-fi
-
 if command -v pyenv >/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
 fi
-
-# Poetry setup (adds Poetry to PATH)
-export PATH="$HOME/.local/bin:$PATH"
-
-# Tkinter setup (tcl-tk dependencies)
-if command -v brew >/dev/null 2>&1; then
-  if brew --prefix tcl-tk >/dev/null 2>&1; then
-    export LDFLAGS="-L$(brew --prefix tcl-tk)/lib"
-    export CPPFLAGS="-I$(brew --prefix tcl-tk)/include"
-    export PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig"
-  fi
-fi
-
-# Python end
-
-# Pnpm
-
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-*":$PNPM_HOME:"*) ;;
-*) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-# Pnpm end
-
-# Java
-
-if command -v brew >/dev/null 2>&1; then
-  if brew --prefix openjdk >/dev/null 2>&1; then
-    export JAVA_HOME="$(brew --prefix openjdk)"
-    export PATH="$JAVA_HOME/bin:$PATH"
-    export CPPFLAGS="-I$(brew --prefix openjdk)/include"
-  fi
-fi
-
-# Java end
-
-# Android Studio
-
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin"
-
-# Android Studio end
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
