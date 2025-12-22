@@ -20,38 +20,14 @@ macos_dir="${dotfiles_dir}/setup/macos"
 echo "Changing to the ${dotfiles_dir} directory"
 cd "${dotfiles_dir}" || exit
 
-# List of source files and target locations
-files=(
-    "git/.gitconfig:${HOME}/.gitconfig"
-    "zsh/.zprofile:${HOME}/.zprofile"
-    "zsh/.zshrc:${HOME}/.zshrc"
-    "wezterm/wezterm.lua:${HOME}/.config/wezterm/wezterm.lua"
-    "starship/starship.toml:${HOME}/.config/starship.toml"
-)
+# Run the symlink script
+if [[ -f "${macos_dir}/symlinks.sh" ]]; then
+  echo "Running symlink setup script..."
+  zsh "${macos_dir}/symlinks.sh"
+else
+  echo "'symlinks.sh' not found, skipping..."
+fi
 
-# Create symlinks (will overwrite old files)
-for file in "${files[@]}"; do
-    # Split the source and target using colon as a delimiter
-    source="${file%%:*}"
-    target="${file##*:}"
-    source_path="${dotfiles_dir}/${source}"
-
-    # Get the directory of the target file
-    target_dir="$(dirname "${target}")"
-
-    # Ensure the target directory exists
-    if [[ ! -d "${target_dir}" ]]; then
-        echo "Creating directory ${target_dir}"
-        mkdir -p "${target_dir}"
-    fi
-
-    if [[ -f "${source_path}" ]]; then
-        echo "Creating symlink for ${source_path} -> ${target}"
-        ln -svf "${source_path}" "${target}"
-    else
-        echo "File ${source_path} does not exist, skipping..."
-    fi
-done
 
 # Run the MacOS script
 if [[ -f "${macos_dir}/general.sh" ]]; then
