@@ -15,6 +15,7 @@ Write-Host "Starting development setup..." -ForegroundColor Green
 $devFontsScript = Join-Path $PSScriptRoot "dev/dev-fonts.ps1"
 $weztermScript = Join-Path $PSScriptRoot "dev/wezterm.ps1"
 $starshipScript = Join-Path $PSScriptRoot "dev/starship.ps1"
+$claudeCodeScript = Join-Path $PSScriptRoot "dev/claude-code.ps1"
 $vsCodeScript = Join-Path $PSScriptRoot "dev/vs-code.ps1"
 $visualStudioScript = Join-Path $PSScriptRoot "dev/visual-studio.ps1"
 $devtoysScript = Join-Path $PSScriptRoot "dev/devtoys.ps1"
@@ -45,6 +46,15 @@ else {
 if (Test-Path $starshipScript) {
     Write-Host "Running Starship setup..." -ForegroundColor Cyan
     & $starshipScript
+}
+else {
+    Write-Host "Error: Starship setup script not found at $starshipScript" -ForegroundColor Red
+}
+
+# Call the Claude Code setup script
+if (Test-Path $claudeCodeScript) {
+    Write-Host "Running Claude Code setup..." -ForegroundColor Cyan
+    & $claudeCodeScript
 }
 else {
     Write-Host "Error: Starship setup script not found at $starshipScript" -ForegroundColor Red
