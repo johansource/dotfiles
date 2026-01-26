@@ -1,6 +1,6 @@
 {
   // General settings
-  "workbench.colorTheme": "Palenight Theme",
+  "workbench.colorTheme": "Palenight (Mild Contrast)",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.settings.editor": "json",
   "workbench.settings.openDefaultSettings": true,
@@ -13,7 +13,7 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.removeUnusedImports": "explicit"
+    "source.removeUnusedImports": "explicit",
   },
   "editor.dragAndDrop": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -22,34 +22,35 @@
   // Json settings
   "[json]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
+
   // Markdown settings
   "[markdown]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   // JavaScript/TypeScript settings
   "[javascript]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[javascriptreact]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescript]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[typescriptreact]": {
     "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   // Python settings
@@ -57,31 +58,36 @@
     "editor.tabSize": 4,
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
+      "source.organizeImports": "explicit",
     },
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.analysis.inlayHints.variableTypes": true,
-    "python.analysis.typeCheckingMode": "standard"
+    "python.analysis.typeCheckingMode": "standard",
   },
 
   // Shell & miscellaneous settings
   "[shellscript]": {
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[ignore]": {
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[powershell]": {
-    "editor.defaultFormatter": "ms-vscode.powershell"
+    "editor.defaultFormatter": "ms-vscode.powershell",
   },
   "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
+   "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+
+  // GitLens extension
   "gitlens.views.scm.grouped.hiddenViews": {
     "commits": true,
     "worktrees": true,
@@ -93,6 +99,6 @@
     "repositories": true,
     "fileHistory": true,
     "launchpad": true,
-    "searchAndCompare": false
-  }
+    "searchAndCompare": false,
+  },
 }
