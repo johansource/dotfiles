@@ -83,7 +83,7 @@
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format",
   },
-   "[github-actions-workflow]": {
+  "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",
   },
 
@@ -101,4 +101,7 @@
     "launchpad": true,
     "searchAndCompare": false,
   },
+
+  // CLaude Code extension
+  "claudeCode.preferredLocation": "sidebar",
 }
