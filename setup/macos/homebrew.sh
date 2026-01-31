@@ -86,6 +86,7 @@ casks=(
     "android-studio"
     "arc"
     "blender"
+    "claude-code"
     "dbeaver-community"
     "devtoys"
     "discord"
