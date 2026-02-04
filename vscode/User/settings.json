@@ -104,4 +104,5 @@
 
   // CLaude Code extension
   "claudeCode.preferredLocation": "sidebar",
+  "docker.extension.enableComposeLanguageServer": false,
 }
