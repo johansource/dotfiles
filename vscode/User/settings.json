@@ -65,6 +65,12 @@
     "python.analysis.typeCheckingMode": "standard",
   },
 
+  // CSharp & .Net
+  "[csharp]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+  },
+
   // Shell & miscellaneous settings
   "[shellscript]": {
     "editor.tabSize": 4,
