@@ -9,8 +9,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [core]
-		eol = lf
-    autocrlf = false
+    eol = lf
+	autocrlf = false
     safecrlf = true
 [diff]
     tool = default
