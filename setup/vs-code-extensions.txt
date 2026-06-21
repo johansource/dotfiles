@@ -1,6 +1,5 @@
 aaron-bond.better-comments
 adpyke.codesnap
-alefragnani.bookmarks
 amlovey.shaderlabvscodefree
 antfu.browse-lite
 antfu.vite
@@ -17,10 +16,8 @@ expo.vscode-expo-tools
 formulahendry.code-runner
 formulahendry.docker-explorer
 foxundermoon.shell-format
-gruntfuggly.todo-tree
 hediet.debug-visualizer
 jeff-hykin.better-cpp-syntax
-johnpapa.vscode-peacock
 k--kato.docomment
 kleber-swf.unity-code-snippets
 kuscamara.remove-unused-imports
