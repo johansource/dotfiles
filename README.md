@@ -75,7 +75,7 @@ This setup will:
     - Pyenv.
     - Poetry.
     - Tcl-Tk for GUI programming.
-  - Node.js environment (optional, via `-NodeJs`):
+  - JavaScript environment (optional, via `-Js`):
     - Installs Pnpm.
     - Installs Node.js via Pnpm.
 
@@ -116,10 +116,10 @@ Updating execution policy and running the script requires running the terminal a
 
 ### Running the Setup Script
 
-To start the Windows setup process, execute the main `windows.ps1` script. The script accepts several optional flags to customize which components are installed. The general setup (`general.ps1`) always runs.
+To start the legacy automated Windows setup process, execute the `windows-automated.ps1` script. The script accepts several optional flags to customize which components are installed. The general setup (`general.ps1`) always runs.
 
 ```ps1
-.\windows.ps1 [-Dev] [-Gaming] [-GameDev] [-Python] [-NodeJs]
+.\windows-automated.ps1 [-Dev] [-Gaming] [-GameDev] [-Python] [-Js]
 ```
 
 #### Flags
@@ -148,7 +148,7 @@ To start the Windows setup process, execute the main `windows.ps1` script. The s
   - Configures Pyenv
   - Installs Poetry
   - Ensures Tcl/Tk is available for GUI programming
-- `-NodeJs`: Sets up the Node.js environment:
+- `-Js`: Sets up the JavaScript environment:
   - Installs Pnpm
   - Installs Node.js via Pnpm
 
