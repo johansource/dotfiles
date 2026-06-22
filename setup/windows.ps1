@@ -7,90 +7,82 @@ $ErrorActionPreference = "Stop"
 
 $dotfilesRoot = Split-Path -Parent $PSScriptRoot
 $manualSetupPath = Join-Path $PSScriptRoot "windows\manual-setup.md"
+$script:SetupResults = @()
+$script:ToolStatus = @{}
 
-function Test-IsAdministrator {
-    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-    $principal = [Security.Principal.WindowsPrincipal] $identity
-
-    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
-}
-
-function Confirm-Administrator {
-    if (-not (Test-IsAdministrator)) {
-        Write-Host "Please run this script as Administrator." -ForegroundColor Red
-        exit 1
-    }
-}
-
-function Confirm-ManualChecklistComplete {
-    Write-Host "Before continuing, complete the manual tool checklist in:" -ForegroundColor Cyan
-    Write-Host "  $manualSetupPath" -ForegroundColor Cyan
-    Write-Host ""
-
-    $manualStepsCompleted = (Read-Host "Have you completed the required manual checklist? [y/N]").Trim().ToLowerInvariant()
-
-    if ($manualStepsCompleted -notin @("y", "yes")) {
-        Write-Host ""
-        Write-Host "Please complete the manual checklist before running this script again." -ForegroundColor Yellow
-        exit 1
-    }
-
-    Write-Host ""
-    Write-Host "Manual checklist confirmed. Continuing..." -ForegroundColor Green
-}
-
-function Invoke-SetupStep {
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]$Name,
-
-        [Parameter(Mandatory = $true)]
-        [scriptblock]$Action
-    )
-
-    Write-Host ""
-    Write-Host "==> $Name" -ForegroundColor Cyan
-    & $Action
-}
-
-function Test-Prerequisites {
-    Write-Host "TODO: Verify required tools such as Git and PowerShell 7." -ForegroundColor DarkYellow
-}
+. (Join-Path $PSScriptRoot "windows\common.ps1")
+. (Join-Path $PSScriptRoot "windows\prerequisites.ps1")
 
 function Install-OrVerifyFonts {
     Write-Host "TODO: Install or verify JetBrains Mono Nerd Font." -ForegroundColor DarkYellow
 }
 
 function Install-OrVerifyStarship {
-    Write-Host "TODO: Install or verify Starship before linking its config." -ForegroundColor DarkYellow
+    if ($script:ToolStatus.Starship) {
+        Write-SetupResult -Status "OK" -Name "Starship Install" -Message "Starship is already available."
+        return
+    }
+
+    if ($script:ToolStatus.Winget) {
+        Write-SetupResult -Status "SKIP" -Name "Starship Install" -Message "TODO: Install Starship with Winget."
+        return
+    }
+
+    Write-SetupResult -Status "WARN" -Name "Starship Install" -Message "Starship is missing and Winget is unavailable."
 }
 
 function Set-GitConfig {
-    Write-Host "TODO: Symlink Git configuration." -ForegroundColor DarkYellow
+    if (-not $script:ToolStatus.Git) {
+        Write-SetupResult -Status "SKIP" -Name "Git Config" -Message "Git is unavailable."
+        return
+    }
+
+    Write-SetupResult -Status "SKIP" -Name "Git Config" -Message "TODO: Symlink Git configuration."
 }
 
 function Set-PowerShellProfile {
-    Write-Host "TODO: Symlink PowerShell profile configuration." -ForegroundColor DarkYellow
+    if (-not $script:ToolStatus.PowerShell) {
+        Write-SetupResult -Status "SKIP" -Name "PowerShell Profile" -Message "PowerShell 7+ is unavailable."
+        return
+    }
+
+    Write-SetupResult -Status "SKIP" -Name "PowerShell Profile" -Message "TODO: Symlink PowerShell profile configuration."
 }
 
 function Set-WezTermConfig {
-    Write-Host "TODO: Symlink WezTerm configuration." -ForegroundColor DarkYellow
+    if (-not $script:ToolStatus.WezTerm) {
+        Write-SetupResult -Status "SKIP" -Name "WezTerm Config" -Message "WezTerm is unavailable."
+        return
+    }
+
+    Write-SetupResult -Status "SKIP" -Name "WezTerm Config" -Message "TODO: Symlink WezTerm configuration."
 }
 
 function Set-StarshipConfig {
-    Write-Host "TODO: Symlink Starship configuration." -ForegroundColor DarkYellow
+    if (-not $script:ToolStatus.Starship) {
+        Write-SetupResult -Status "SKIP" -Name "Starship Config" -Message "Starship is unavailable."
+        return
+    }
+
+    Write-SetupResult -Status "SKIP" -Name "Starship Config" -Message "TODO: Symlink Starship configuration."
 }
 
 function Set-VSCodeConfig {
-    Write-Host "TODO: Install VS Code extensions and symlink VS Code configuration." -ForegroundColor DarkYellow
+    if (-not $script:ToolStatus.VSCode) {
+        Write-SetupResult -Status "SKIP" -Name "Visual Studio Code Config" -Message "VS Code CLI is unavailable."
+        return
+    }
+
+    Write-SetupResult -Status "SKIP" -Name "Visual Studio Code Config" -Message "TODO: Install VS Code extensions and symlink VS Code configuration."
 }
 
 function Set-NeovimConfig {
-    Write-Host "TODO: Symlink Neovim configuration." -ForegroundColor DarkYellow
-}
+    if (-not $script:ToolStatus.Neovim) {
+        Write-SetupResult -Status "SKIP" -Name "Neovim Config" -Message "Neovim is unavailable."
+        return
+    }
 
-function Show-SetupSummary {
-    Write-Host "TODO: Show setup verification summary." -ForegroundColor DarkYellow
+    Write-SetupResult -Status "SKIP" -Name "Neovim Config" -Message "TODO: Symlink Neovim configuration."
 }
 
 Confirm-Administrator
@@ -113,4 +105,9 @@ Invoke-SetupStep "Neovim" { Set-NeovimConfig }
 Invoke-SetupStep "Summary" { Show-SetupSummary }
 
 Write-Host ""
+if (@($script:SetupResults | Where-Object { $_.Status -eq "ERROR" }).Count -gt 0) {
+    Write-Host "Windows dotfiles setup completed with errors." -ForegroundColor Red
+    exit 1
+}
+
 Write-Host "Windows dotfiles setup completed!" -ForegroundColor Green
