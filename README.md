@@ -1,6 +1,6 @@
 # Dotfiles
 
-This repository was created to mostly automate setting up a desired environment on a fresh machine.
+This repository keeps personal dotfiles and setup scripts for restoring my shell, editor, terminal, and Git configuration.
 
 ## Table of Contents
 
@@ -11,11 +11,11 @@ This repository was created to mostly automate setting up a desired environment 
 
 ## <a name="getting-started"></a> Getting Started
 
-This repository helps you quickly set up a new development environment by:
+This repository helps restore a familiar development environment by:
 
-- Installing essential tools and software
 - Configuring applications with customized settings
 - Creating symlinks for dotfiles to maintain consistency across machines.
+- Installing or configuring a small number of dotfiles-adjacent tools when manual setup is awkward.
 
 ## <a name="macos"></a> MacOS
 
@@ -33,7 +33,7 @@ This setup will:
 
 ### Setup
 
-1. Clone (or manually dowload pre-Git) the repository to your desired local directory:
+1. Clone (or manually download pre-Git) the repository to your desired local directory:
    ```sh
    git clone https://github.com/johansource/dotfiles.git ~/Projects/dotfiles
    ```
@@ -48,64 +48,27 @@ This setup will:
 
 ## <a name="windows"></a> Windows
 
-This setup will:
+The Windows setup is manual-first. Tool installs should be handled by following `setup/windows/manual-setup.md`; this repository should manage dotfiles and configuration for:
 
-- Install essential tools and software:
-  - Git (always installed via `general.ps1`).
-  - Developer tools (optional, via `-Dev`):
-    - Visual Studio Code (including extensions and configuration).
-    - Visual Studio.
-    - Neovim.
-    - WezTerm (with configuration).
-    - Starship (with configuration).
-    - DevToys.
-    - Installs fonts.
-    - Symlinks configuration files:
-      - `wezterm.lua`
-      - `starship.toml`
-      - `Microsoft.PowerShell_profile.ps1`
-  - Gaming tools (optional, via `-Gaming`):
-    - Steam.
-  - Game development tools (optional, via `-GameDev`):
-    - Unity Hub.
-    - Unreal Engine (via Epic Games Launcher).
-    - Blender.
-  - Python environment (optional, via `-Python`):
-    - Python.
-    - Pyenv.
-    - Poetry.
-    - Tcl-Tk for GUI programming.
-  - JavaScript environment (optional, via `-Js`):
-    - Installs Pnpm.
-    - Installs Node.js via Pnpm.
-
-- Create symbolic links for configuration files:
-  - `.gitconfig` (always symlinked via `general.ps1`).
-  - `wezterm.lua`, `starship.toml`, and `Microsoft.PowerShell_profile.ps1` (symlinked via `-Dev`).
-  - VS Code settings (`settings.json`) and optionally `keybindings.json` (symlinked via `-Dev`).
-
-- Automate installation using Winget and PowerShell scripts for simplicity and reproducibility.
-
-- Provide a modular setup with flags to optionally install specific components or skip them entirely.
-
+- Git
+- Neovim
+- WezTerm
+- Starship
+- PowerShell
+- Visual Studio Code
 
 ### Prerequisites
 
-Updating execution policy and running the script requires running the terminal as Administrator.
+Updating execution policy and running the script requires running the terminal as Administrator. Before running the script, complete the manual setup checklist in `setup/windows/manual-setup.md`.
 
 1. Ensure you have the following installed:
-   - **PowerShell 7+** (comes pre-installed with Windows 10/11).
-   - **Winget** (Windows Package Manager, included with Windows 11).
-   - **Git** (will be installed by the `general.ps1` script if not already installed).
-     - To preemptively install Git the same way the script would, run this Winget command:
-        ```ps1
-        winget install --id Git.Git -e --source winget
-        ```
+   - **PowerShell 7+**
+   - **Git**
 2. Update execution policy to allow running scripts:
    ```ps1
    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
    ```
-3. Clone (or manually dowload pre-Git) the repository to your desired local directory:
+3. Clone (or manually download pre-Git) the repository to your desired local directory:
    ```ps1
    git clone https://github.com/johansource/dotfiles.git C:/Projects/dotfiles
    ```
@@ -116,41 +79,19 @@ Updating execution policy and running the script requires running the terminal a
 
 ### Running the Setup Script
 
-To start the legacy automated Windows setup process, execute the `windows-automated.ps1` script. The script accepts several optional flags to customize which components are installed. The general setup (`general.ps1`) always runs.
+The new Windows setup script is intended for dotfiles-related configuration after the manual checklist is complete.
+
+```ps1
+.\windows.ps1
+```
+
+### Legacy Automated Setup
+
+The previous Winget-heavy automation has been archived under `setup/windows-automated`. It remains available as reference, but it is no longer the recommended Windows setup path.
 
 ```ps1
 .\windows-automated.ps1 [-Dev] [-Gaming] [-GameDev] [-Python] [-Js]
 ```
-
-#### Flags
-
-- `-Dev`: Installs developer tools including:
-  - WezTerm
-  - Starship
-  - Visual Studio Code
-  - Visual Studio
-  - Neovim
-  - Devtoys
-  - Installs fonts.
-  - Symlinks configuration files:
-    - `wezterm.lua`
-    - `starship.toml`
-    - `Microsoft.PowerShell_profile.ps1`
-  - Installs and configures extensions and preferences for Visual Studio Code
-- `-Gaming`: Installs game platforms and related software such as:
-  - Steam
-- `-GameDev`: Installs game development tools such as:
-  - Blender
-  - Unity Hub
-  - Epic Games Launcher (for Unreal Engine)
-- `-Python`: Sets up the Python environment:
-  - Installs Python
-  - Configures Pyenv
-  - Installs Poetry
-  - Ensures Tcl/Tk is available for GUI programming
-- `-Js`: Sets up the JavaScript environment:
-  - Installs Pnpm
-  - Installs Node.js via Pnpm
 
 ## <a name="post-setup-notes"></a> Post-Setup Notes
 
@@ -161,8 +102,8 @@ To start the legacy automated Windows setup process, execute the `windows-automa
 
 ### Windows-Specific Notes
 
-1. **Verify Symlinks:**
-   - Ensure all symbolic links (e.g., `.gitconfig`, `wezterm.lua`, `starship.toml`, `Microsoft.PowerShell_profile.ps1`) are created correctly:
+1. **Verify Configuration:**
+   - Ensure the expected tools are configured and symlinks point back to this repository:
       ```ps1
       Get-ChildItem -Path $env:USERPROFILE\.gitconfig
       ```
