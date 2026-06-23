@@ -2,9 +2,6 @@
   // General settings
   "workbench.colorTheme": "Palenight (Mild Contrast)",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.settings.editor": "json",
-  "workbench.settings.openDefaultSettings": true,
-  "workbench.settings.useSplitJSON": true,
   "workbench.startupEditor": "none",
   "editor.fontSize": 16,
   "debug.console.fontSize": 16,
@@ -115,14 +112,20 @@
     "tags": true,
     "worktrees": true,
     "contributors": true,
-    "fileHistory": false,
+    "fileHistory": true,
     "repositories": true,
-    "searchAndCompare": false,
-    "launchpad": false,
+    "searchAndCompare": true,
+    "launchpad": true,
   },
 
-  // CLaude Code extension
+  // Claude Code extension
   "claudeCode.preferredLocation": "sidebar",
-  "docker.extension.enableComposeLanguageServer": false,
   "chat.viewSessions.orientation": "stacked",
+
+  // Docker Explorer extension
+  "docker-explorer.showDockerContainers": false,
+  "docker-explorer.showDockerImages": false,
+  "docker-explorer.showAzureRegistries": false,
+  "docker-explorer.showDockerHubTreeView": false,
+  "docker-explorer.showSuggestedDockerImages": false,
 }
