@@ -9,12 +9,27 @@ function Install-OrVerifyStarship {
         return
     }
 
-    if ($script:ToolStatus.Winget) {
-        Write-SetupResult -Status "SKIP" -Name "Starship Install" -Message "TODO: Install Starship with Winget."
+    if (-not $script:ToolStatus.Winget) {
+        Write-SetupResult -Status "WARN" -Name "Starship Install" -Message "Starship is missing and Winget is unavailable."
         return
     }
 
-    Write-SetupResult -Status "WARN" -Name "Starship Install" -Message "Starship is missing and Winget is unavailable."
+    & winget install --id Starship.Starship -e --source winget --accept-source-agreements --accept-package-agreements
+    if ($LASTEXITCODE -ne 0) {
+        Write-SetupResult -Status "ERROR" -Name "Starship Install" -Message "Winget failed to install Starship."
+        return
+    }
+
+    Update-SessionPath
+
+    if (Test-CommandAvailable -Command "starship") {
+        $script:ToolStatus.Starship = $true
+        Write-SetupResult -Status "OK" -Name "Starship Install" -Message "Installed Starship successfully."
+        return
+    }
+
+    $script:ToolStatus.Starship = $false
+    Write-SetupResult -Status "WARN" -Name "Starship Install" -Message "Starship installed, but the command is not available in this session. Restart the terminal and run setup again."
 }
 
 function Set-StarshipConfig {

@@ -13,6 +13,11 @@ The dotfiles script should manage configuration for:
 - PowerShell
 - Visual Studio Code
 
+It can also install or verify a few dotfiles-adjacent dependencies:
+
+- JetBrains Mono Nerd Font
+- Starship, via Winget if missing
+
 The checklist below is intentionally separate from the dotfiles script so tool installation stays visible and easy to change.
 
 ## Required Tools
@@ -20,6 +25,9 @@ The checklist below is intentionally separate from the dotfiles script so tool i
 - [ ] Install Git.
 - [ ] Clone this repository to `C:\Projects\dotfiles`.
 - [ ] Install PowerShell 7.
+  ```ps1
+  winget install --id Microsoft.PowerShell --source winget
+  ```
 - [ ] Allow local setup scripts for the current user.
 
 ```ps1
@@ -29,12 +37,15 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ## Terminal And Shell
 
 - [ ] Install WezTerm.
-- [ ] Install Starship, or leave it for `setup/windows.ps1` if the script handles installation later.
-- [ ] Install JetBrains Mono Nerd Font, or leave it for `setup/windows.ps1` if the script handles installation later.
 - [ ] Open PowerShell 7 once to let it create its profile directories.
 - [ ] Install Visual Studio Code.
   - [ ] Confirm the `code` command is available in a new terminal.
 - [ ] Install Neovim.
+
+## Script-Managed Dependencies
+
+- [ ] Leave Starship for `setup/windows.ps1`, or install it manually first if preferred.
+- [ ] Leave JetBrains Mono Nerd Font for `setup/windows.ps1`, or install it manually first if preferred.
 
 ## Before Running The Script
 

@@ -10,7 +10,7 @@ local window_decorations
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   -- Windows configuration
-  default_prog = {"powershell.exe"}
+  default_prog = { "pwsh.exe", "-NoLogo" }
   window_decorations = "TITLE | RESIZE"
 elseif wezterm.target_triple == "x86_64-apple-darwin" then
   -- macOS configuration
@@ -42,8 +42,8 @@ config = {
   -- Disable the tab bar since this configuration doesn't use multiple tabs
   enable_tab_bar = false,
 
-  -- Set the terminal font to JetBrains Mono with a bold weight for better readability
-  font = wezterm.font("JetBrains Mono", { weight = "Bold"}),
+  -- Set the terminal font to JetBrains Mono Nerd Font with a bold weight for icon support
+  font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Bold"}),
   -- Set a comfortable font size for readability
   font_size = 16.0,
 

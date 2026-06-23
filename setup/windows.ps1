@@ -29,6 +29,8 @@ Write-Host ""
 Confirm-ManualChecklistComplete -ManualSetupPath $manualSetupPath
 
 Invoke-SetupStep "Prerequisites" { Test-Prerequisites }
+Stop-IfSetupHasErrors -Message "Required prerequisites failed. Stopping before making changes."
+
 Invoke-SetupStep "Git" { Set-GitConfig }
 Invoke-SetupStep "Fonts" { Install-OrVerifyFonts }
 Invoke-SetupStep "Starship" { Install-OrVerifyStarship }
@@ -40,7 +42,7 @@ Invoke-SetupStep "Neovim" { Set-NeovimConfig }
 Invoke-SetupStep "Summary" { Show-SetupSummary }
 
 Write-Host ""
-if (@($script:SetupResults | Where-Object { $_.Status -eq "ERROR" }).Count -gt 0) {
+if ((Get-SetupErrorCount) -gt 0) {
     Write-Host "Windows dotfiles setup completed with errors." -ForegroundColor Red
     exit 1
 }

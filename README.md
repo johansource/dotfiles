@@ -57,6 +57,8 @@ The Windows setup is manual-first. Tool installs should be handled by following 
 - PowerShell
 - Visual Studio Code
 
+The Windows script may also install or verify dotfiles-adjacent dependencies such as Starship and JetBrains Mono Nerd Font when needed.
+
 ### Prerequisites
 
 Updating execution policy and running the script requires running the terminal as Administrator. Before running the script, complete the manual setup checklist in `setup/windows/manual-setup.md`.

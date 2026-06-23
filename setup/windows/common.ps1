@@ -83,6 +83,24 @@ function Write-SetupResult {
     Add-SetupResult -Status $Status -Name $Name -Message $Message
 }
 
+function Get-SetupErrorCount {
+    return @($script:SetupResults | Where-Object { $_.Status -eq "ERROR" }).Count
+}
+
+function Stop-IfSetupHasErrors {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Message
+    )
+
+    if ((Get-SetupErrorCount) -gt 0) {
+        Write-Host ""
+        Write-Host $Message -ForegroundColor Red
+        Invoke-SetupStep "Summary" { Show-SetupSummary }
+        exit 1
+    }
+}
+
 function Test-CommandAvailable {
     param (
         [Parameter(Mandatory = $true)]
@@ -135,18 +153,36 @@ function New-DirectoryIfMissing {
     }
 }
 
+function Update-SessionPath {
+    $machinePath = [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine)
+    $userPath = [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::User)
+    $env:Path = @($machinePath, $userPath) -join ";"
+}
+
 function Resolve-NormalizedPath {
     param (
         [Parameter(Mandatory = $true)]
-        [string]$Path
+        [object]$Path
     )
 
-    $resolvedPath = Resolve-Path -LiteralPath $Path -ErrorAction SilentlyContinue
+    $pathValue = @($Path | ForEach-Object { $_ } | Select-Object -First 1)[0]
+    if (-not $pathValue) {
+        return $null
+    }
+
+    if ($pathValue -is [System.IO.FileSystemInfo]) {
+        $pathString = $pathValue.FullName
+    }
+    else {
+        $pathString = [string]$pathValue
+    }
+
+    $resolvedPath = Resolve-Path -LiteralPath $pathString -ErrorAction SilentlyContinue
     if ($resolvedPath) {
         return $resolvedPath.ProviderPath.TrimEnd("\")
     }
 
-    return [System.IO.Path]::GetFullPath($Path).TrimEnd("\")
+    return [System.IO.Path]::GetFullPath($pathString).TrimEnd("\")
 }
 
 function Test-SymlinkTarget {
@@ -187,7 +223,9 @@ function New-SafeSymlink {
     }
 
     $targetDirectory = Split-Path -Parent $Target
-    New-DirectoryIfMissing -Path $targetDirectory
+    if ($targetDirectory) {
+        New-DirectoryIfMissing -Path $targetDirectory
+    }
 
     if (Test-SymlinkTarget -Path $Target -Target $Source) {
         Write-SetupResult -Status "OK" -Name $Name -Message "Already linked."

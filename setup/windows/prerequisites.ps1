@@ -10,6 +10,9 @@ function Test-Prerequisites {
     }
     else {
         Write-SetupResult -Status "ERROR" -Name "PowerShell" -Message "PowerShell 7+ is required. Current version is $($PSVersionTable.PSVersion)."
+        Write-Host "Install PowerShell 7 with:" -ForegroundColor Yellow
+        Write-Host "  winget install --id Microsoft.PowerShell --source winget" -ForegroundColor Yellow
+        Write-Host "Then open PowerShell 7 as Administrator and run this setup again." -ForegroundColor Yellow
         $script:ToolStatus.PowerShell = $false
     }
 
