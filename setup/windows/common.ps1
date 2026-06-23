@@ -18,8 +18,13 @@ function Confirm-Administrator {
 }
 
 function Confirm-ManualChecklistComplete {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$ManualSetupPath
+    )
+
     Write-Host "Before continuing, complete the manual tool checklist in:" -ForegroundColor Cyan
-    Write-Host "  $manualSetupPath" -ForegroundColor Cyan
+    Write-Host "  $ManualSetupPath" -ForegroundColor Cyan
     Write-Host ""
 
     $manualStepsCompleted = (Read-Host "Have you completed the required manual checklist? [y/N]").Trim().ToLowerInvariant()
