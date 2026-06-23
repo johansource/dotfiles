@@ -60,11 +60,11 @@ function Install-VSCodeExtensions {
     Write-Host "Installing VS Code extensions..." -ForegroundColor Cyan
   
     # Path to the extensions file
-    $extensionsFile = Join-Path $PSScriptRoot "..\..\vs-code-extensions.txt"
+    $extensionsFile = Join-Path $PSScriptRoot "..\..\..\vscode\extensions.txt"
   
     # Ensure the extensions file exists
     if (-Not (Test-Path $extensionsFile)) {
-        Write-Host "Error: vs-code-extensions.txt file not found." -ForegroundColor Red
+        Write-Host "Error: vscode/extensions.txt file not found." -ForegroundColor Red
         exit 1
     }
   

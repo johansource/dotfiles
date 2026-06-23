@@ -11,11 +11,11 @@ if ! command -v code &>/dev/null; then
 fi
 
 # Path to the extensions file
-EXTENSIONS_FILE="$(dirname "$0")/../vs-code-extensions.txt"
+EXTENSIONS_FILE="${HOME}/Projects/dotfiles/vscode/extensions.txt"
 
 # Ensure the extensions file exists
 if [[ ! -f "$EXTENSIONS_FILE" ]]; then
-    echo "Error: vs-code-extensions.txt file not found."
+    echo "Error: vscode/extensions.txt file not found."
     exit 1
 fi
 

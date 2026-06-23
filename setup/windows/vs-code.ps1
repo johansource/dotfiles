@@ -9,7 +9,7 @@ function Install-VSCodeExtensions {
         return
     }
 
-    $extensionsFile = Join-Path $dotfilesRoot "setup\vs-code-extensions.txt"
+    $extensionsFile = Join-Path $dotfilesRoot "vscode\extensions.txt"
     if (-not (Test-FileExists -Path $extensionsFile)) {
         Write-SetupResult -Status "ERROR" -Name "VS Code Extensions" -Message "Extensions file not found: $extensionsFile"
         return
