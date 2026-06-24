@@ -8,6 +8,7 @@ bradlc.vscode-tailwindcss
 catppuccin.catppuccin-vsc
 christian-kohler.path-intellisense
 clinyong.vscode-css-modules
+davidanson.vscode-markdownlint
 dbaeumer.vscode-eslint
 dsznajder.es7-react-js-snippets
 eamodio.gitlens
