@@ -128,4 +128,6 @@
   "docker-explorer.showAzureRegistries": false,
   "docker-explorer.showDockerHubTreeView": false,
   "docker-explorer.showSuggestedDockerImages": false,
+  "markdown-preview-enhanced.previewTheme": "vscode.css",
+  "markdown-preview-enhanced.revealjsTheme": "vscode.css",
 }
