@@ -3,42 +3,6 @@
 # Optional JavaScript tooling for Windows dotfiles setup
 ############################
 
-function Add-UserPathEntry {
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]$Path,
-
-        [switch]$Prepend
-    )
-
-    $normalizedPath = [System.IO.Path]::GetFullPath($Path).TrimEnd("\")
-    $userPath = [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::User)
-    $pathEntries = @($userPath -split ";" | Where-Object {
-            $_ -and ([System.IO.Path]::GetFullPath($_).TrimEnd("\") -ine $normalizedPath)
-        })
-
-    if ($Prepend) {
-        $pathEntries = @($normalizedPath) + $pathEntries
-    }
-    else {
-        $pathEntries += $normalizedPath
-    }
-
-    [Environment]::SetEnvironmentVariable("Path", ($pathEntries -join ";"), [EnvironmentVariableTarget]::User)
-
-    $sessionPathEntries = @($env:Path -split ";" | Where-Object { $_ })
-    $sessionPathEntries = @($sessionPathEntries | Where-Object {
-            [System.IO.Path]::GetFullPath($_).TrimEnd("\") -ine $normalizedPath
-        })
-
-    if ($Prepend) {
-        $env:Path = (@($normalizedPath) + $sessionPathEntries) -join ";"
-    }
-    else {
-        $env:Path = ($sessionPathEntries + @($normalizedPath)) -join ";"
-    }
-}
-
 function Invoke-JavaScriptCommand {
     param (
         [Parameter(Mandatory = $true)]

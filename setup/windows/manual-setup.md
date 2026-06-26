@@ -18,6 +18,7 @@ It can also install or verify a few dotfiles-adjacent dependencies:
 - JetBrains Mono Nerd Font
 - Starship, via Winget if missing
 - Pnpm and Node.js LTS, when the setup script is run with `-Js`
+- uv and Python, when the setup script is run with `-Python`
 
 The checklist below is intentionally separate from the dotfiles script so tool installation stays visible and easy to change.
 
@@ -67,8 +68,14 @@ To include the optional JavaScript toolchain setup:
 .\windows.ps1 -Js
 ```
 
+To include the optional Python toolchain setup:
+
+```ps1
+.\windows.ps1 -Python
+```
+
 After the checklist has already been completed once, the confirmation prompt can be skipped:
 
 ```ps1
-.\windows.ps1 -SkipManualSetup
+.\windows.ps1 -SkipManualCheck
 ```

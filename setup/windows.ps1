@@ -5,6 +5,7 @@
 
 param (
     [switch]$Js,
+    [switch]$Python,
     [switch]$SkipManualCheck
 )
 
@@ -25,6 +26,7 @@ $script:ToolStatus = @{}
 . (Join-Path $PSScriptRoot "windows\vs-code.ps1")
 . (Join-Path $PSScriptRoot "windows\neovim.ps1")
 . (Join-Path $PSScriptRoot "windows\javascript.ps1")
+. (Join-Path $PSScriptRoot "windows\python.ps1")
 
 Confirm-Administrator
 
@@ -52,6 +54,9 @@ Invoke-SetupStep "Visual Studio Code" { Set-VSCodeConfig }
 Invoke-SetupStep "Neovim" { Set-NeovimConfig }
 if ($Js) {
     Invoke-SetupStep "JavaScript" { Install-OrVerifyJavaScriptToolchain }
+}
+if ($Python) {
+    Invoke-SetupStep "Python" { Install-OrVerifyPythonToolchain }
 }
 Invoke-SetupStep "Summary" { Show-SetupSummary }
 
