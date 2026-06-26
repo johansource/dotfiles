@@ -17,6 +17,7 @@ It can also install or verify a few dotfiles-adjacent dependencies:
 
 - JetBrains Mono Nerd Font
 - Starship, via Winget if missing
+- Pnpm and Node.js LTS, when the setup script is run with `-Js`
 
 The checklist below is intentionally separate from the dotfiles script so tool installation stays visible and easy to change.
 
@@ -25,9 +26,11 @@ The checklist below is intentionally separate from the dotfiles script so tool i
 - [ ] Install Git.
 - [ ] Clone this repository to `C:\Projects\dotfiles`.
 - [ ] Install PowerShell 7.
+
   ```ps1
   winget install --id Microsoft.PowerShell --source winget
   ```
+
 - [ ] Allow local setup scripts for the current user.
 
 ```ps1
@@ -56,4 +59,16 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
 ```ps1
 .\windows.ps1
+```
+
+To include the optional JavaScript toolchain setup:
+
+```ps1
+.\windows.ps1 -Js
+```
+
+After the checklist has already been completed once, the confirmation prompt can be skipped:
+
+```ps1
+.\windows.ps1 -SkipManualSetup
 ```

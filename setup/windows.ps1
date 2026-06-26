@@ -3,6 +3,11 @@
 # Manual-first setup script for Windows
 ############################
 
+param (
+    [switch]$Js,
+    [switch]$SkipManualCheck
+)
+
 $ErrorActionPreference = "Stop"
 
 $dotfilesRoot = Split-Path -Parent $PSScriptRoot
@@ -19,6 +24,7 @@ $script:ToolStatus = @{}
 . (Join-Path $PSScriptRoot "windows\wezterm.ps1")
 . (Join-Path $PSScriptRoot "windows\vs-code.ps1")
 . (Join-Path $PSScriptRoot "windows\neovim.ps1")
+. (Join-Path $PSScriptRoot "windows\javascript.ps1")
 
 Confirm-Administrator
 
@@ -26,7 +32,12 @@ Write-Host "Starting Windows dotfiles setup..." -ForegroundColor Green
 Write-Host "Dotfiles root: $dotfilesRoot" -ForegroundColor DarkGray
 Write-Host ""
 
-Confirm-ManualChecklistComplete -ManualSetupPath $manualSetupPath
+if ($SkipManualCheck) {
+    Write-Host "Manual checklist prompt skipped." -ForegroundColor Yellow
+}
+else {
+    Confirm-ManualChecklistComplete -ManualSetupPath $manualSetupPath
+}
 
 Invoke-SetupStep "Prerequisites" { Test-Prerequisites }
 Stop-IfSetupHasErrors -Message "Required prerequisites failed. Stopping before making changes."
@@ -39,6 +50,9 @@ Invoke-SetupStep "PowerShell" { Set-PowerShellProfile }
 Invoke-SetupStep "WezTerm" { Set-WezTermConfig }
 Invoke-SetupStep "Visual Studio Code" { Set-VSCodeConfig }
 Invoke-SetupStep "Neovim" { Set-NeovimConfig }
+if ($Js) {
+    Invoke-SetupStep "JavaScript" { Install-OrVerifyJavaScriptToolchain }
+}
 Invoke-SetupStep "Summary" { Show-SetupSummary }
 
 Write-Host ""
