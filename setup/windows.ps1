@@ -52,15 +52,19 @@ Invoke-SetupStep "PowerShell" { Set-PowerShellProfile }
 Invoke-SetupStep "WezTerm" { Set-WezTermConfig }
 Invoke-SetupStep "Visual Studio Code" { Set-VSCodeConfig }
 Invoke-SetupStep "Neovim" { Set-NeovimConfig }
+
 if ($Js) {
     Invoke-SetupStep "JavaScript" { Install-OrVerifyJavaScriptToolchain }
 }
+
 if ($Python) {
     Invoke-SetupStep "Python" { Install-OrVerifyPythonToolchain }
 }
+
 Invoke-SetupStep "Summary" { Show-SetupSummary }
 
 Write-Host ""
+
 if ((Get-SetupErrorCount) -gt 0) {
     Write-Host "Windows dotfiles setup completed with errors." -ForegroundColor Red
     exit 1

@@ -253,8 +253,8 @@ function New-SafeSymlink {
         [string]$Name
     )
 
-    if (-not (Test-FileExists -Path $Source)) {
-        Write-SetupResult -Status "ERROR" -Name $Name -Message "Source file not found: $Source"
+    if (-not (Test-Path -LiteralPath $Source)) {
+        Write-SetupResult -Status "ERROR" -Name $Name -Message "Source not found: $Source"
         return
     }
 

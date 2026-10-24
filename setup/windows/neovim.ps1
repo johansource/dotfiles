@@ -9,8 +9,8 @@ function Set-NeovimConfig {
         return
     }
 
-    $source = Join-Path $dotfilesRoot "nvim\init.lua"
-    $target = Join-Path $env:LOCALAPPDATA "nvim\init.lua"
+    $source = Join-Path $dotfilesRoot "nvim"
+    $target = Join-Path $env:LOCALAPPDATA "nvim"
 
     New-SafeSymlink -Source $source -Target $target -Name "Neovim Config"
 }
